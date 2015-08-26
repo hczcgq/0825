@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/button_text"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/login_logo" />
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_color"/>
+    <ListView
+        android:id="@+id/aboutListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:divider="@color/line_color"
+        android:layout_below="@+id/lineTextView"
+        android:dividerHeight="1px"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:layout_above="@+id/workButton"
+        android:cacheColorHint="#00000000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_color"/>
+</LinearLayout>

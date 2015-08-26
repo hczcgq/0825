@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/button_text"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/login_logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@color/line_color"/>
+
+    <TextView
+        android:id="@+id/webSiteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/edittext_input_color"
+        android:text="网站：http://www.shuofatang.com"
+        android:padding="10dp"
+        android:textSize="@dimen/text_20"/>
+    <TextView
+        android:id="@+id/mobileTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/edittext_input_color"
+        android:text="电话：021-20228283"
+        android:padding="10dp"
+        android:textSize="@dimen/text_20"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/edittext_input_color"
+        android:text="微信服务号ID：shuofatang(说法堂)"
+        android:padding="10dp"
+        android:textSize="@dimen/text_20"/>
+
+
+</LinearLayout>

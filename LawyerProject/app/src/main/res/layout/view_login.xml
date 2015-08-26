@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/login_logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input_bg"
+            android:hint="@string/login_mobile"
+            android:inputType="number"
+            android:padding="3dip"
+            android:textColorHint="#aab2be"
+            android:textColor="@color/edittext_input_color"
+            android:textSize="@dimen/input_text" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input_bg"
+            android:hint="@string/login_password"
+            android:inputType="textPassword"
+            android:padding="3dip"
+            android:textColorHint="#aab2be"
+            android:textColor="@color/edittext_input_color"
+            android:textSize="@dimen/input_text" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_login"
+            android:text="@string/login"
+            android:onClick="loginClick"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/button_text" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center|right"
+            android:background="@android:color/transparent"
+            android:gravity="center|right"
+            android:textSize="@dimen/input_text"
+            android:onClick="forgetPasswordClick"
+            android:text="@string/forget_password_w"
+            android:textColor="@color/header_background_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_weight="1"
+                android:background="@color/line_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/no_account"
+                android:textColor="@color/line_color" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_weight="1"
+                android:background="@color/line_color" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_white"
+            android:text="@string/register_quik"
+            android:onClick="registerClick"
+            android:textColor="@color/line_color"
+            android:textSize="@dimen/button_text" />
+    </LinearLayout>
+
+</LinearLayout>

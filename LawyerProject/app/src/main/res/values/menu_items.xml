@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="about_items">
+        <item >联系我们</item>
+        <item >意见反馈</item>
+        <item >版本更新</item>
+        <item >分享APP</item>
+        <item >给我好评</item>
+    </string-array>
+</resources>

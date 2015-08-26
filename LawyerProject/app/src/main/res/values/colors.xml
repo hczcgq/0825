@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="btn_blue_normal">#4FC5EB</color>
+    <color name="btn_blue_pressed">#18A4D1</color>
+    <color name="btn_blue_enable">#CCCCCC</color>
+
+
+    <!--标题背景-->
+    <color name="header_background_color">#FB6822</color>
+
+    <!--登录按钮-->
+    <color name="btn_login_normal">#FB6822</color>
+    <color name="btn_login_pressed">#F6824B</color>
+
+    <!--线-->
+    <color name="line_color">#AFAFAF</color>
+
+    <color name="white_pressed">#FBFBFB</color>
+
+    <!--背景-->
+    <color name="background_color">#E0E0E0</color>
+
+    <color name="edittext_input_color">#000000</color>
+</resources>

@@ -1,0 +1,55 @@
+<com.lawyer.android.view.MainLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/menuView"
+        layout="@layout/view_fragment_main_menu"/>
+
+    <!-- This holds our content-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- This acts as Actionbar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            android:background="@color/header_background_color"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/activity_main_content_button_menu"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dp"
+                android:onClick="toggleMenu"
+                android:layout_gravity="center"
+                android:background="@drawable/action_menu" />
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text"
+                android:textStyle="bold"
+                android:text="@string/app_name" />
+
+        </LinearLayout>
+
+        <!-- This is where fragment will show up -->
+        <FrameLayout
+            android:id="@+id/activity_main_content_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</com.lawyer.android.view.MainLayout>
