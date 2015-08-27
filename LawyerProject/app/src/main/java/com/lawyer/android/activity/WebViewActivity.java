@@ -7,11 +7,10 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
-
 import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
 import com.lawyer.android.bean.ToolItem;
+import com.lawyer.android.util.LoadingDialog;
 
 /**
  * Created by hm-soft on 2015/8/26.
@@ -20,7 +19,9 @@ public class WebViewActivity extends BaseUIActivity{
 
     private ToolItem item;
     private WebView webView;
-    private ProgressBar progressBar;
+
+    private LoadingDialog mLoadingDialog;
+
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
@@ -28,7 +29,7 @@ public class WebViewActivity extends BaseUIActivity{
 
 
         webView = (WebView) findViewById(R.id.helpWebView);
-        progressBar= (ProgressBar)findViewById(R.id.progressbar);
+        mLoadingDialog = new LoadingDialog(this);
 
         item= (ToolItem) getIntent().getSerializableExtra("item");
         if(item!=null){
@@ -70,12 +71,10 @@ public class WebViewActivity extends BaseUIActivity{
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100) {
-                    progressBar.setVisibility(View.GONE);
+                    mLoadingDialog.dismiss();
                 } else {
-                    progressBar.setVisibility(View.VISIBLE);
+                    mLoadingDialog.dialogShow();
                 }
-                progressBar.setProgress(newProgress);
-                progressBar.postInvalidate();
                 super.onProgressChanged(view, newProgress);
             }
 

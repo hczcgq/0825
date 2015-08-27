@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lawyer.android.R;
+import com.lawyer.android.util.LoadingDialog;
 
 /**
  * Created by hm-soft on 2015/8/26.
@@ -22,7 +23,7 @@ import com.lawyer.android.R;
 public class FragmentHelpCenter extends Fragment {
     private WebView webView;
 
-    private ProgressBar progressBar;
+    private LoadingDialog mLoadingDialog;
 
     public FragmentHelpCenter() {
 
@@ -33,7 +34,7 @@ public class FragmentHelpCenter extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_fragment_help, null);
         webView = (WebView) view.findViewById(R.id.helpWebView);
-        progressBar= (ProgressBar) view.findViewById(R.id.progressbar);
+        mLoadingDialog=new LoadingDialog(getActivity());
         return view;
     }
 
@@ -66,12 +67,10 @@ public class FragmentHelpCenter extends Fragment {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100) {
-                    progressBar.setVisibility(View.GONE);
+                    mLoadingDialog.dismiss();
                 } else {
-                    progressBar.setVisibility(View.VISIBLE);
+                   mLoadingDialog.dialogShow();
                 }
-                progressBar.setProgress(newProgress);
-                progressBar.postInvalidate();
                 super.onProgressChanged(view, newProgress);
             }
 

@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.lawyer.android.R;
 import com.lawyer.android.activity.ContactUsActivity;
+import com.lawyer.android.activity.FeedbackActivity;
 import com.lawyer.android.adapter.AboutAdapter;
 
 import java.util.Arrays;
@@ -39,7 +40,7 @@ public class FragmentAboutUs extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initDate();
     }
@@ -61,6 +62,9 @@ public class FragmentAboutUs extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
                     intent=new Intent(getActivity(),ContactUsActivity.class);
+                    startActivity(intent);
+                }else if(position==1){
+                    intent=new Intent(getActivity(),FeedbackActivity.class);
                     startActivity(intent);
                 }
             }

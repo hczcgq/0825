@@ -4,12 +4,27 @@
     android:layout_height="match_parent"
     android:background="@android:color/white" >
 
-    <TextView
-	     android:layout_width="match_parent"
-	     android:layout_height="wrap_content"
-	     android:layout_centerInParent="true"
-	     android:text="Demo Sliding Menu"
-	     android:gravity="center"
-	     android:id="@+id/fragment_main_textview" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/greenroundbtn"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="听单中"
+            android:textSize="@dimen/text_20"
+            android:textColor="@android:color/white"
+            android:gravity="center" />
+        </RelativeLayout>
 
 </RelativeLayout>

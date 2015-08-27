@@ -10,11 +10,28 @@
         android:layout_centerHorizontal="true"
         android:layout_height="fill_parent"/>
 
+
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_login"
+        android:text="立即体验"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/button_text"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"/>
+
     <LinearLayout
         android:id="@+id/linearlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/btn_start"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal" >
 
@@ -23,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:padding="17dip"
+            android:padding="5dip"
             android:src="@drawable/point_select" />
 
         <ImageView
@@ -31,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:padding="17dip"
+            android:padding="5dip"
             android:src="@drawable/point_normal" />
 
         <ImageView
@@ -39,21 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:padding="17dip"
+            android:padding="5dip"
             android:src="@drawable/point_normal" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:background="@drawable/btn_blue"
-        android:text="立即体验"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/button_text"
-        android:visibility="gone"
-        android:layout_above="@+id/linearlayout"
-        android:layout_alignRight="@+id/linearlayout"
-        android:layout_alignEnd="@+id/linearlayout" />
 
 </RelativeLayout>

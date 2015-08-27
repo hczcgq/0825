@@ -21,7 +21,7 @@
         android:padding="20dp">
 
         <EditText
-            android:id="@+id/usernameEditText"
+            android:id="@+id/mobileEditText"
             android:layout_width="match_parent"
             android:layout_height="@dimen/edittext_height"
             android:layout_marginTop="10dp"
@@ -52,7 +52,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/btn_login"
             android:text="@string/login"
-            android:onClick="loginClick"
+            android:onClick="LoginClick"
             android:textColor="@android:color/white"
             android:textSize="@dimen/button_text" />
 
@@ -64,7 +64,7 @@
             android:background="@android:color/transparent"
             android:gravity="center|right"
             android:textSize="@dimen/input_text"
-            android:onClick="forgetPasswordClick"
+            android:onClick="ForgetPasswordClick"
             android:text="@string/forget_password_w"
             android:textColor="@color/header_background_color" />
 
@@ -101,7 +101,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/btn_white"
             android:text="@string/register_quik"
-            android:onClick="registerClick"
+            android:onClick="RegisterClick"
             android:textColor="@color/line_color"
             android:textSize="@dimen/button_text" />
     </LinearLayout>

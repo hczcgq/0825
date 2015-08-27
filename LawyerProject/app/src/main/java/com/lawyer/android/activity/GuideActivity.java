@@ -137,8 +137,10 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
 
         if (current==images.length-1) {
             btn_start.setVisibility(View.VISIBLE);
+            btn_start.setEnabled(true);
         }else {
-            btn_start.setVisibility(View.GONE);
+            btn_start.setVisibility(View.INVISIBLE);
+            btn_start.setEnabled(false);
         }
     }
 }

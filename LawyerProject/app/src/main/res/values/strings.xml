@@ -30,4 +30,15 @@
     <string name="menu_about">关于我们</string>
     
     <string name="contact_us">联系我们</string>
+    <string name="feedback">意见反馈</string>
+    <string name="feedback_des">请输入您宝贵的意见</string>
+    <string name="feedback_des_is_empty">请填写您的宝贵意见</string>
+    <string name="submit">提交</string>
+
+    <string name="input_mobile">请输入手机号</string>
+    <string name="input_password">请输入密码</string>
+    <string name="input_veviry">请输入验证码</string>
+    <string name="input_password_again">请再次输入密码</string>
+    <string name="input_password_not_eque">两次输入的密码不一致</string>
+
 </resources>
