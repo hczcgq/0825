@@ -18,6 +18,7 @@
     <string name="set_password">设置密码</string>
     <string name="confirm_password">再次设置密码</string>
     <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
     <string name="forget_password">忘记密码</string>
     <string name="save">保存</string>
     <string name="work_on">上班</string>
@@ -40,5 +41,10 @@
     <string name="input_veviry">请输入验证码</string>
     <string name="input_password_again">请再次输入密码</string>
     <string name="input_password_not_eque">两次输入的密码不一致</string>
+
+    <string name="person">个人信息</string>
+
+    <string name="take_photo">拍照</string>
+    <string name="choose_photo">相册</string>
 
 </resources>

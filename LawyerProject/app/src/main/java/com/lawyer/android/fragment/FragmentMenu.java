@@ -3,22 +3,20 @@ package com.lawyer.android.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.lawyer.android.R;
-import com.lawyer.android.activity.WebViewActivity;
+import com.lawyer.android.activity.PersonActivity;
 import com.lawyer.android.adapter.MenuAdapter;
-import com.lawyer.android.adapter.ToolAdapter;
 import com.lawyer.android.bean.MenuItem;
-import com.lawyer.android.bean.ToolItem;
-import com.lawyer.android.util.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +28,7 @@ public class FragmentMenu extends Fragment {
 
     private ListView mListView;
     private List<MenuItem> menuItems;
+    private ImageView avaterImageView;
     public FragmentMenu() {
 
     }
@@ -49,6 +48,7 @@ public class FragmentMenu extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_fragment_main_menu, null);
         mListView = (ListView) view.findViewById(R.id.activity_main_menu_listview);
+        avaterImageView= (ImageView) view.findViewById(R.id.avaterImageView);
         return view;
     }
 
@@ -61,9 +61,25 @@ public class FragmentMenu extends Fragment {
     private void initView(){
         menuItems=getMenuItems();
         mListView.setAdapter(new MenuAdapter(getActivity(),menuItems));
+        //列表点击事件
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mCallback.onMenuItemClick(position,menuItems.get(position).getName());
+            }
+        });
+
+        //点击头像
+        avaterImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inten=new Intent(getActivity(),PersonActivity.class);
+                startActivity(inten);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mCallback.onMenuItemClick(-1,-1);
+                    }
+                }, 1000);
             }
         });
     }

@@ -54,6 +54,11 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.FeedbackActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PersonActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.SelectDialogActivity"
+            android:theme="@style/ActivityDialogStyle" />
     </application>
 
 </manifest>

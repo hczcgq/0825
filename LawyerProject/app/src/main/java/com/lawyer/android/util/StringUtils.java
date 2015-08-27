@@ -17,4 +17,12 @@ public class StringUtils {
             return false;
         }
     }
+
+    /**
+     * 获取当前时间－毫秒
+     * @return
+     */
+    public static String getCurrentTimes(){
+        return String.valueOf(System.currentTimeMillis());
+    }
 }

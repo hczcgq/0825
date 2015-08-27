@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.lib.SlidingFragmentActivity;
 import com.lawyer.android.R;
@@ -15,8 +15,8 @@ import com.lawyer.android.fragment.FragmentAboutUs;
 import com.lawyer.android.fragment.FragmentHelpCenter;
 import com.lawyer.android.fragment.FragmentLawyerTool;
 import com.lawyer.android.fragment.FragmentMenu;
-import com.lawyer.android.fragment.FragmentOrder;
 import com.lawyer.android.fragment.FragmentMessage;
+import com.lawyer.android.fragment.FragmentOrder;
 
 /**
  * Created by hm-soft on 2015/8/26.
@@ -64,6 +64,12 @@ public class MainActivity extends SlidingFragmentActivity implements FragmentMen
 
     @Override
     public void onMenuItemClick(int position, int title) {
+
+        if(position==-1||title==-1){
+            toggle();
+            return;
+        }
+
         String currentItem = titleTextView.getText().toString();
 
         if (getString(title).compareTo(currentItem) == 0) {

@@ -11,10 +11,9 @@ import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
 import com.lawyer.android.http.HttpHelper;
 import com.lawyer.android.http.httpUtils;
+import com.lawyer.android.util.Constants;
 import com.lawyer.android.util.StringUtils;
 import com.lawyer.android.util.ToastUtils;
-
-import org.apache.http.protocol.HTTP;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +47,8 @@ public class LoginActivity extends BaseUIActivity{
     }
 
     public void LoginClick(View view){
+
+        new GetDataTask().execute();
         String mobile=mobileEditText.getText().toString();
         String password=passwordEditText.getText().toString();
         if(StringUtils.isEmpty(mobile)){
@@ -60,21 +61,14 @@ public class LoginActivity extends BaseUIActivity{
         }
 
 
+        intent=new Intent(this,MainActivity.class);
+        startActivity(intent);
 
-//        intent=new Intent(this,MainActivity.class);
-//        startActivity(intent);
 
-        String appSecret="fdsh4vrFDSvjfds94";
-        Map<String, String> params=new HashMap<String, String>();
-        String ts=String.valueOf(System.currentTimeMillis());
-        params.put("v","1.0");
-        params.put("ts",ts);
-        params.put("appKey","ios01");
-        params.put("method","item.get");
-        params.put("itemId", "1");
-        params.put("sign", httpUtils.sign(params,appSecret));
+//
 
-        new GetDataTask(params).execute();
+        new LoginTask(mobile,password).execute();
+
 
 
 
@@ -102,16 +96,21 @@ public class LoginActivity extends BaseUIActivity{
 
     class GetDataTask extends AsyncTask<String,Void,String>{
 
-        private Map<String, String> paramsmap;
-
-        public GetDataTask(Map<String, String> paramsmap) {
-            this.paramsmap=paramsmap;
-        }
 
         @Override
         protected String doInBackground(String... params) {
+            String appSecret="fdsh4vrFDSvjfds94";
+            Map<String, String> map=new HashMap<String, String>();
+            String ts=String.valueOf(System.currentTimeMillis());
+            map.put("v","1.0");
+            map.put("ts",ts);
+            map.put("appKey","ios01");
+            map.put("method","item.get");
+            map.put("itemId", "1");
+            map.put("sign", httpUtils.sign(map,appSecret));
+
             try {
-                String result= HttpHelper.doRequestForString(LoginActivity.this,"http://api.shuofatang.com/router",HttpHelper.HTTP_POST ,paramsmap);
+                String result= HttpHelper.doRequestForString(LoginActivity.this,"http://api.shuofatang.com/router",HttpHelper.HTTP_POST ,map);
                 Log.e("---",result);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -120,4 +119,37 @@ public class LoginActivity extends BaseUIActivity{
         }
     }
 
+    /**
+     * 登录请求
+     */
+    class LoginTask extends AsyncTask<String,Void,String>{
+
+        private String mobile,password;
+
+        public LoginTask(String mobile, String password) {
+            this.mobile=mobile;
+            this.password=password;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String result="";
+            Map<String, String> map=new HashMap<String, String>();
+            map.put("v","1.0");
+            map.put("ts",StringUtils.getCurrentTimes());
+            map.put("appKey", Constants.APP_KEY);
+            map.put("method",getString(R.string.lawyer_login_url));
+            map.put("loginCode", mobile);
+            map.put("password", password);
+            map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
+            try {
+                result= HttpHelper.doRequestForString(LoginActivity.this,getString(R.string.base_url),HttpHelper.HTTP_POST ,map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+
+    }
 }
