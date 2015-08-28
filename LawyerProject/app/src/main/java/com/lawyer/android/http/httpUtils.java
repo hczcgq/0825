@@ -38,7 +38,6 @@ public class httpUtils {
             String sign = byte2hex(sha1Digest);
             return sign;
         } catch (IOException e) {
-            Log.e("--",e.getMessage() + e);
         }
         return null;
     }

@@ -37,6 +37,7 @@
     <string name="submit">提交</string>
 
     <string name="input_mobile">请输入手机号</string>
+    <string name="input_right_mobile">请输入有效的手机号</string>
     <string name="input_password">请输入密码</string>
     <string name="input_veviry">请输入验证码</string>
     <string name="input_password_again">请再次输入密码</string>

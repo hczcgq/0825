@@ -7,7 +7,7 @@ public class Constants {
 
     public static final String ISFIRST="ISFIRST";
 
-    public static final String APP_KEY="android01";
+    public static final String APP_KEY="ios01";
 
     public static final String APP_SECRET="fdsh4vrFDSvjfds94";
 }
