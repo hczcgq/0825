@@ -1,15 +1,14 @@
 package com.lawyer.android.activity;
 
-import android.app.Dialog;
-import android.media.AsyncPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
 import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
+import com.lawyer.android.bean.LawyerItem;
 import com.lawyer.android.http.HttpHelper;
 import com.lawyer.android.http.httpUtils;
 import com.lawyer.android.util.Constants;
@@ -84,7 +83,6 @@ public class RegisterActivity extends BaseUIActivity{
         map.put("method", getString(R.string.lawyer_validationcode_url));
         map.put("cellPhone", mobile);
         map.put("userType", "LAWYER");
-//        map.put("extId","LAWYER01");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(REQUEST_VALIDATIONCODE,map);
 
@@ -151,7 +149,7 @@ public class RegisterActivity extends BaseUIActivity{
     }
 
 
-    class RequestData extends AsyncTask<String,Void ,String> {
+    class RequestData extends AsyncTask<String,Void ,LawyerItem> {
         private int request_code;
         private Map<String, String> map;
 
@@ -161,21 +159,28 @@ public class RegisterActivity extends BaseUIActivity{
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            String result="";
+        protected LawyerItem doInBackground(String... params) {
+            LawyerItem item=null;
             try {
-                result=HttpHelper.doRequestForString(RegisterActivity.this, getString(R.string.base_url), HttpHelper.HTTP_POST, map);
+               String result=HttpHelper.doRequestForString(RegisterActivity.this, getString(R.string.base_url), HttpHelper.HTTP_POST, map);
+                item=new Gson().fromJson(result,LawyerItem.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.e("---",result);
-            return  result;
+            return  item;
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(LawyerItem result) {
+            super.onPostExecute(result);
             mLoadingDialog.dismiss();
+            if(result!=null){
+                if(result.isSuccess()){
+
+                }else{
+                    ToastUtils.showToastShort(RegisterActivity.this,result.getMessage());
+                }
+            }
         }
 
         @Override

@@ -5,9 +5,17 @@ package com.lawyer.android.util;
  */
 public class Constants {
 
-    public static final String ISFIRST="ISFIRST";
+    public static final String ISFIRST="ISFIRST";  //是否第一次登录
 
     public static final String APP_KEY="ios01";
 
     public static final String APP_SECRET="fdsh4vrFDSvjfds94";
+
+    public static final String PRE_MOBILE="PRE_MOBILE";  //用户名
+
+    public static final String PRE_PASSWORD="PRE_PASSWORD";  //密码
+
+    public static final String PRE_LAWYERID="PRE_LAWYERID"; //律师ID
+
+    public static final String PRE_MAC="PER_MAC"; //信息校验
 }

@@ -4,6 +4,13 @@
     <string name="base_url">http://api.shuofatang.com/router</string>
     <string name="lawyer_login_url">lawyer.login</string>
     <string name="lawyer_validationcode_url">validationCode.get</string>
-    <string name="lawyer.register_url">lawyer.register</string>
+    <string name="lawyer_register_url">lawyer.register</string>
+    <string name="lawyer_resetpwd_url">lawyer.resetPwd</string>
+    <string name="lawyer_get_url">lawyer.get</string>
+    <string name="lawyer_update_url">lawyer.update</string>
+    <string name="lawyer_message_get_url">message.get</string>
+    <string name="lawyer_update_password_url">lawyer.chPwd</string>
+    <string name="lawyer_firm_get_url">lawFirm.get</string>
+
 
  </resources>

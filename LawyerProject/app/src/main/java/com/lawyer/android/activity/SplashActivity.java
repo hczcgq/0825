@@ -2,12 +2,8 @@ package com.lawyer.android.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Handler;
 import android.view.Window;
 
 import com.lawyer.android.R;
@@ -33,7 +29,7 @@ public class SplashActivity extends Activity {
                 @Override
                 public void run() {
                     // 设置跳转的Intent
-                    intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -9,6 +9,7 @@
     <string name="login_mobile">手机号</string>
     <string name="login_password">密码</string>
     <string name="login">登录</string>
+    <string name="logout">退出登录</string>
     <string name="forget_password_w">忘记密码?</string>
     <string name="no_account">还没有账号</string>
     <string name="register_quik">马上注册</string>
@@ -18,8 +19,16 @@
     <string name="set_password">设置密码</string>
     <string name="confirm_password">再次设置密码</string>
     <string name="confirm">确定</string>
+    <string name="confirm_update">确定修改</string>
     <string name="cancel">取消</string>
     <string name="forget_password">忘记密码</string>
+    <string name="update_password">修改密码</string>
+    <string name="input_old_passowrd">请输入旧密码</string>
+    <string name="input_old_passowrd_error">旧密码错误</string>
+    <string name="input_new_passowrd">请输入新密码</string>
+    <string name="input_confirm_new_passowrd">请确认新密码</string>
+    <string name="old_passowrd_equle_new">新密码与旧密码相同</string>
+    <string name="input_two_new_passowrd_no_equle">两次新密码不相同</string>
     <string name="save">保存</string>
     <string name="work_on">上班</string>
     <string name="work_off">下班</string>
@@ -43,9 +52,29 @@
     <string name="input_password_again">请再次输入密码</string>
     <string name="input_password_not_eque">两次输入的密码不一致</string>
 
-    <string name="person">个人信息</string>
+    <string name="person">账户信息</string>
 
     <string name="take_photo">拍照</string>
     <string name="choose_photo">相册</string>
+
+    <string name="lawyer_name">律师姓名</string>
+    <string name="lawyer_firm">执业律所</string>
+    <string name="lawyer_ct_number">执业证号</string>
+    <string name="lawyer_ct_year">执业年限</string>
+    <string name="lawyer_ct_type">执业证类别</string>
+    <string name="lawyer_des">律师介绍</string>
+    <string name="lawyer_edu">学历</string>
+    <string name="lawyer_gender">性别</string>
+    <string name="lawyer_address">办公地址</string>
+
+    <string name="input_lawyer_name">填写律师姓名</string>
+    <string name="input_lawyer_firm">填写执业律所</string>
+    <string name="input_lawyer_ct_number">填写执业证号</string>
+    <string name="input_lawyer_ct_year">填写执业年限</string>
+    <string name="input_lawyer_ct_type">填写执业证类别</string>
+    <string name="input_lawyer_des">填写律师介绍</string>
+    <string name="input_lawyer_edu">填写学历</string>
+    <string name="input_lawyer_gender">填写性别</string>
+    <string name="input_lawyer_address">填写办公地址</string>
 
 </resources>

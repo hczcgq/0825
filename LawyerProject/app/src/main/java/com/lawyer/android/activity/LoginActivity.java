@@ -10,12 +10,12 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
-import com.lawyer.android.bean.LoginItem;
+import com.lawyer.android.bean.LawyerItem;
 import com.lawyer.android.http.HttpHelper;
 import com.lawyer.android.http.httpUtils;
 import com.lawyer.android.util.Constants;
 import com.lawyer.android.util.LoadingDialog;
-import com.lawyer.android.util.SHA1;
+import com.lawyer.android.util.PreferencesUtils;
 import com.lawyer.android.util.StringUtils;
 import com.lawyer.android.util.ToastUtils;
 
@@ -23,7 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by hm-soft on 2015/8/26.
+ * 登录
+ *
+ * Created by chenguoquan on 2015/8/26.
  */
 public class LoginActivity extends BaseUIActivity{
 
@@ -43,6 +45,9 @@ public class LoginActivity extends BaseUIActivity{
         initView();
     }
 
+    /**
+     * 初始化控件
+     */
     private void initView(){
         //标题
         setHeadTitle(R.string.login_title);
@@ -52,6 +57,11 @@ public class LoginActivity extends BaseUIActivity{
         passwordEditText= (TextView) findViewById(R.id.passwordEditText);
     }
 
+
+    /**
+     * 登录点击
+     * @param view
+     */
     public void LoginClick(View view){
 
         String mobile=mobileEditText.getText().toString();
@@ -74,7 +84,6 @@ public class LoginActivity extends BaseUIActivity{
         map.put("loginCode", mobile);
         map.put("password", password);
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
-        //appKeyios01loginCode18516276648methodlawyer.loginpassword123456ts1440756604170v1.0fdsh4vrFDSvjfds94
         loadDate(map);
     }
 
@@ -114,7 +123,7 @@ public class LoginActivity extends BaseUIActivity{
     /**
      * 登录请求
      */
-    class RequestData extends AsyncTask<String,Void,LoginItem>{
+    class RequestData extends AsyncTask<String,Void,LawyerItem>{
 
         private  Map<String, String> map;
         public RequestData(Map<String, String> map) {
@@ -122,11 +131,12 @@ public class LoginActivity extends BaseUIActivity{
         }
 
         @Override
-        protected LoginItem doInBackground(String... params) {
-            LoginItem item =null;
+        protected LawyerItem doInBackground(String... params) {
+            LawyerItem item =null;
             try {
                 String result= HttpHelper.doRequestForString(LoginActivity.this,getString(R.string.base_url),HttpHelper.HTTP_POST ,map);
-                item = new Gson().fromJson(result,LoginItem.class);
+                Log.e("---",result);
+                item = new Gson().fromJson(result, LawyerItem.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -134,14 +144,20 @@ public class LoginActivity extends BaseUIActivity{
         }
 
         @Override
-        protected void onPostExecute(LoginItem result) {
+        protected void onPostExecute(LawyerItem result) {
             super.onPostExecute(result);
             mLoadingDialog.dismiss();
             if(result!=null){
                 if(result.isSuccess()){
-                    ToastUtils.showToastShort(LoginActivity.this,"Success");
-                    intent=new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
+                    //保存用户名和密码
+                    PreferencesUtils.putString(LoginActivity.this, Constants.PRE_MOBILE, mobileEditText.getText().toString());
+                    PreferencesUtils.putString(LoginActivity.this,Constants.PRE_PASSWORD,passwordEditText.getText().toString());
+                    //保存律师ID
+                    PreferencesUtils.putString(LoginActivity.this, Constants.PRE_LAWYERID, result.getLawyer().getId());
+                    PreferencesUtils.putString(LoginActivity.this,Constants.PRE_MAC,result.getLawyer().getMac());
+                    finish();
+                }else{
+                    ToastUtils.showToastShort(LoginActivity.this,result.getMessage());
                 }
             }
         }

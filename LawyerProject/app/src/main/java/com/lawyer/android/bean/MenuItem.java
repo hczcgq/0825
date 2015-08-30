@@ -1,6 +1,7 @@
 package com.lawyer.android.bean;
 
 /**
+ * 左侧菜单实体
  * Created by hm-soft on 2015/8/26.
  */
 public class MenuItem {

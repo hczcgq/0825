@@ -1,6 +1,7 @@
 package com.lawyer.android.fragment;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,9 +15,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.lawyer.android.R;
+import com.lawyer.android.activity.LoginActivity;
 import com.lawyer.android.activity.PersonActivity;
 import com.lawyer.android.adapter.MenuAdapter;
 import com.lawyer.android.bean.MenuItem;
+import com.lawyer.android.util.Constants;
+import com.lawyer.android.util.DialogUtil;
+import com.lawyer.android.util.PreferencesUtils;
+import com.lawyer.android.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,14 +78,33 @@ public class FragmentMenu extends Fragment {
         avaterImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inten=new Intent(getActivity(),PersonActivity.class);
-                startActivity(inten);
+//                Intent intent=new Intent(getActivity(),PersonActivity.class);
+//                startActivity(intent);
+//                startActivityForResult(intent, MainActivity.REQUEST_CODE);
+
+
+                String lawyerId= PreferencesUtils.getString(getActivity(), Constants.PRE_LAWYERID, null);
+                String mobile=PreferencesUtils.getString(getActivity(), Constants.PRE_MOBILE, null);
+                if(StringUtils.isEmpty(lawyerId)&&StringUtils.isEmpty(mobile)){
+                    DialogUtil.showCustomDialog(getActivity(), "提示", "您还没有登录，是否现在等", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }else{
+                    Intent intent=new Intent(getActivity(),PersonActivity.class);
+                    startActivity(intent);
+//                    startActivityForResult(intent,REQUEST_CODE);
+                }
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mCallback.onMenuItemClick(-1,-1);
                     }
-                }, 1000);
+                }, 500);
             }
         });
     }

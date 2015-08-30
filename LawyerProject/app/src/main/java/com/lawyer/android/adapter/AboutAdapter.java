@@ -34,4 +34,7 @@ public class AboutAdapter extends BaseAdapterHelpter<String>{
         nameTextView.setText(datas.get(position));
         return holder.getConvertView();
     }
+
+
+
 }

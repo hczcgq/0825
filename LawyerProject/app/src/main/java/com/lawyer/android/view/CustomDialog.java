@@ -184,8 +184,8 @@ public class CustomDialog extends Dialog {
             if (positiveButtonText != null) {
                 ((Button) layout.findViewById(R.id.positiveButton))
                         .setText(positiveButtonText);
-                ((Button) layout.findViewById(R.id.positiveButton))
-                        .setTextColor(0xff1E90FF);
+//                ((Button) layout.findViewById(R.id.positiveButton));
+//                        .setTextColor(0xff1E90FF);
 
                 if (positiveButtonClickListener != null) {
                     ((Button) layout.findViewById(R.id.positiveButton))
@@ -205,8 +205,8 @@ public class CustomDialog extends Dialog {
             if (negativeButtonText != null) {
                 ((Button) layout.findViewById(R.id.negativeButton))
                         .setText(negativeButtonText);
-                ((Button) layout.findViewById(R.id.negativeButton))
-                        .setTextColor(0xff1E90FF);
+//                ((Button) layout.findViewById(R.id.negativeButton))
+//                        .setTextColor(0xff1E90FF);
                 if (negativeButtonClickListener != null) {
                     ((Button) layout.findViewById(R.id.negativeButton))
                             .setOnClickListener(new View.OnClickListener() {

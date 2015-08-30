@@ -1,5 +1,7 @@
 package com.lawyer.android.activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,21 +19,37 @@ import com.lawyer.android.fragment.FragmentLawyerTool;
 import com.lawyer.android.fragment.FragmentMenu;
 import com.lawyer.android.fragment.FragmentMessage;
 import com.lawyer.android.fragment.FragmentOrder;
+import com.lawyer.android.util.Constants;
+import com.lawyer.android.util.DialogUtil;
+import com.lawyer.android.util.PreferencesUtils;
+import com.lawyer.android.util.StringUtils;
 
 /**
  * Created by hm-soft on 2015/8/26.
  */
 public class MainActivity extends SlidingFragmentActivity implements FragmentMenu.MenuListOnItemClickListener {
-    private Button btMenu;
+    private Button btMenu,btPerson;
 
     private TextView titleTextView;
 
     private SlidingMenu mSlidingMenu;
 
+    public static final int REQUEST_CODE=100;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_main);
+
+        initView();
+        initEvent();
+    }
+
+
+    /**
+     * 初始化控件
+     */
+    private void initView(){
         setBehindContentView(R.layout.frame_left_menu);
         mSlidingMenu = getSlidingMenu();
         mSlidingMenu.setMode(SlidingMenu.LEFT);//设置左右都可以划出SlidingMenu菜单
@@ -47,14 +65,44 @@ public class MainActivity extends SlidingFragmentActivity implements FragmentMen
         fragmentTransaction.commit();
 
         // Get menu button
-        btMenu = (Button) findViewById(R.id.activity_main_content_button_menu);
+        titleTextView = (TextView) findViewById(R.id.titleTextView);
+        btMenu = (Button) findViewById(R.id.menuButton);
+        btPerson= (Button) findViewById(R.id.PersonButton);
+    }
+
+    /**
+     * 初始化事件
+     */
+    private void initEvent(){
         btMenu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 toggle();
             }
         });
-        titleTextView = (TextView) findViewById(R.id.titleTextView);
+        btPerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String lawyerId= PreferencesUtils.getString(MainActivity.this, Constants.PRE_LAWYERID, null);
+                String mobile=PreferencesUtils.getString(MainActivity.this, Constants.PRE_MOBILE, null);
+                if(StringUtils.isEmpty(lawyerId)&&StringUtils.isEmpty(mobile)){
+                    DialogUtil.showCustomDialog(MainActivity.this, "提示", "您还没有登录，是否现在等", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }else{
+                    Intent intent=new Intent(MainActivity.this,PersonActivity.class);
+                    startActivity(intent);
+//                    startActivityForResult(intent,REQUEST_CODE);
+                }
+
+            }
+        });
     }
+
 
 
     @Override
@@ -98,5 +146,14 @@ public class MainActivity extends SlidingFragmentActivity implements FragmentMen
             titleTextView.setText(title);
         }
         toggle();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_CODE&&resultCode==REQUEST_CODE){
+
+        }
     }
 }

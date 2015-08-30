@@ -6,26 +6,38 @@
         android:orientation="vertical">
 
         <!-- This acts as Actionbar -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/header_height"
             android:background="@color/header_background_color"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/activity_main_content_button_menu"
+                android:id="@+id/menuButton"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/action_menu"
-                android:onClick="toggleMenu" />
+                android:layout_centerVertical="true"
+                android:background="@drawable/action_menu"/>
+            <Button
+                android:id="@+id/PersonButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_avater"/>
 
             <TextView
                 android:id="@+id/titleTextView"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_centerInParent="true"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/app_name"
@@ -33,7 +45,7 @@
                 android:textSize="@dimen/title_text"
                 android:textStyle="bold" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <!-- This is where fragment will show up -->
         <FrameLayout

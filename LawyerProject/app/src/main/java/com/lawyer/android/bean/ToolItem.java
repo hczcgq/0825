@@ -3,6 +3,7 @@ package com.lawyer.android.bean;
 import java.io.Serializable;
 
 /**
+ * 法律工具实体
  * Created by hm-soft on 2015/8/26.
  */
 public class ToolItem implements Serializable{

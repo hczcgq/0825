@@ -59,7 +59,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(GuideActivity.this,
-                        LoginActivity.class);
+                        MainActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -15,12 +15,13 @@ public class httpUtils {
 
     /**
      * 生成签名
-     * @param params 请求参数
+     *
+     * @param params    请求参数
      * @param appSecret 加密字符串
      * @return
      */
     public static String sign(Map<String, String> params, String appSecret) {
-        String[] arr = params.keySet().toArray(new String[] {});
+        String[] arr = params.keySet().toArray(new String[]{});
         // 将参数做字母序排序
         Arrays.sort(arr);
         // 参数拼接
@@ -32,7 +33,7 @@ public class httpUtils {
         }
         // 字符串末尾添加appSecret
         pa.append(appSecret);
-        Log.e("--","待签名内容：" + pa.toString());
+        Log.e("--", "待签名内容：" + pa.toString());
         try {
             byte[] sha1Digest = getSHA1Digest(pa.toString());
             String sign = byte2hex(sha1Digest);
@@ -69,5 +70,21 @@ public class httpUtils {
             sign.append(hex.toUpperCase());
         }
         return sign.toString();
+    }
+
+
+    /**
+     * SHA1加密的二进制转十六进制字符串
+     * @param str
+     * @return
+     */
+    public static String hexSHA1(String str) {
+        String hexsha1 = null;
+        try {
+            hexsha1 = byte2hex(getSHA1Digest(str));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return hexsha1;
     }
 }

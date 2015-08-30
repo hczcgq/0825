@@ -7,6 +7,410 @@
     android:orientation="vertical">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/black"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/avaterImageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/usericon" />
+                <TextView
+                    android:id="@+id/updatePasswordTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:text="@string/update_password"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/button_text" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_name"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text"
+                    android:id="@+id/nameTextView" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_firm"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/firmTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_firm"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_ct_number"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/numberTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_ct_number"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_ct_year"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/yearTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_ct_year"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_ct_type"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/typeTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_ct_type"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_des"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/desTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_des"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_edu"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/eduTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_edu"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_gender"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/genderTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_gender"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="10dp"
+                android:background="@color/line_color" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/lawyer_address"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/button_text" />
+
+                <TextView
+                    android:id="@+id/addressTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/icon_arrow"
+                    android:gravity="center|right"
+                    android:hint="@string/input_lawyer_address"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/line_color"
+                    android:textSize="@dimen/button_text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/btn_login"
+                android:text="@string/logout"
+                android:layout_alignParentBottom="true"
+                android:onClick="LogoutClick"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/button_text" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
