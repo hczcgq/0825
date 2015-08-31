@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/nameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edittext_height"
+        android:layout_margin="10dp"
+        android:background="@drawable/input_bg"
+        android:inputType="text"
+        android:padding="3dip"
+        android:textColor="@color/edittext_input_color"
+        android:textColorHint="#aab2be"
+        android:textSize="@dimen/input_text" />
+
+
+</LinearLayout>

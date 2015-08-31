@@ -17,6 +17,7 @@ import com.lawyer.android.util.Constants;
 import com.lawyer.android.util.LoadingDialog;
 import com.lawyer.android.util.PreferencesUtils;
 import com.lawyer.android.util.StringUtils;
+import com.lawyer.android.util.ToastUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,12 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
 
     private static final int REQUEST_GETPERSON = 100;  //{"success":true}
     private static final int REQUEST_UPDATEPERSON = 101;
+
+    public static final int CODE_NAME = 101;
+    public static final int CODE_FIRM = 102;
+    public static final int CODE_GENDER = 103;
+    public static final int CODE_EDU = 104;
+
     private RequestData mRequestData;
     private Intent intent;
     private LoadingDialog mLoadingDialog;
@@ -80,6 +87,10 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
     private void initEvent() {
         avaterImageView.setOnClickListener(this);
         updatePasswordTextView.setOnClickListener(this);
+        nameTextView.setOnClickListener(this);
+        firmTextView.setOnClickListener(this);
+        eduTextView.setOnClickListener(this);
+        genderTextView.setOnClickListener(this);
     }
 
     private void initData() {
@@ -92,6 +103,72 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         map.put("lawyerId", lawyerID);
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(REQUEST_GETPERSON, map);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.avaterImageView:
+                break;
+            case R.id.updatePasswordTextView:
+                intent = new Intent(this, UpdatePasswordActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nameTextView:
+                intent = new Intent(this, UpdatePersonActivity.class);
+                intent.putExtra("tag", CODE_NAME);
+                startActivityForResult(intent, CODE_NAME);
+                break;
+            case R.id.firmTextView:
+                intent = new Intent(this, UpdatePersonActivity.class);
+                intent.putExtra("tag", CODE_FIRM);
+                startActivityForResult(intent, CODE_FIRM);
+                break;
+            case R.id.genderTextView:
+                intent = new Intent(this,
+                        WheelDialogAvtivity.class);
+                intent.putExtra("Tag", Constants.WHEEL_SEX);
+                startActivityForResult(intent, CODE_GENDER);
+                overridePendingTransition(R.anim.push_bottom_in,
+                        R.anim.push_bottom_out);
+                break;
+            case R.id.eduTextView:
+                intent = new Intent(this,
+                        WheelDialogAvtivity.class);
+                intent.putExtra("Tag", Constants.WHEEL_EDU);
+                startActivityForResult(intent, CODE_EDU);
+                overridePendingTransition(R.anim.push_bottom_in,
+                        R.anim.push_bottom_out);
+                break;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        lawyerID = PreferencesUtils.getString(this, Constants.PRE_LAWYERID);
+        mac = PreferencesUtils.getString(PersonActivity.this, Constants.PRE_MAC);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("v", "1.0");
+        map.put("ts", StringUtils.getCurrentTimes());
+        map.put("appKey", Constants.APP_KEY);
+        map.put("method", getString(R.string.lawyer_update_url));
+        map.put("id", lawyerID);
+        map.put("mac", mac);
+        if (requestCode == CODE_NAME && resultCode == CODE_NAME) {
+            String name = data.getStringExtra("name");
+            map.put("name", name);
+        }if (requestCode == CODE_FIRM && resultCode == CODE_FIRM) {
+            String name = data.getStringExtra("name");
+            map.put("lawFirmName", name);
+        }  else if (requestCode == CODE_GENDER && resultCode == CODE_GENDER) {
+            String name = data.getStringExtra("name");
+            map.put("sex", name);
+        }
+        map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
+        loadDate(REQUEST_UPDATEPERSON, map);
     }
 
 
@@ -109,43 +186,21 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         mRequestData.execute();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.avaterImageView:
-                break;
-            case R.id.updatePasswordTextView:
-                intent = new Intent(this, UpdatePasswordActivity.class);
-                startActivity(intent);
-                break;
-        }
-    }
 
+    /**
+     * 登出
+     *
+     * @param view
+     */
     public void LogoutClick(View view) {
-//        lawyerID= PreferencesUtils.getString(this, Constants.PRE_LAWYERID);
-//        mac=PreferencesUtils.getString(PersonActivity.this,Constants.PRE_MAC);
-//        Map<String, String> map=new HashMap<String, String>();
-//        map.put("v","1.0");
-//        map.put("ts", StringUtils.getCurrentTimes());
-//        map.put("appKey", Constants.APP_KEY);
-//        map.put("method", getString(R.string.lawyer_update_url));
-//        map.put("id",lawyerID);
-//        map.put("mac",mac);
-//        map.put("name","chenguoquan");
-//        map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
-//        loadDate(REQUEST_GETPERSON,map);
-
         PreferencesUtils.putString(this, Constants.PRE_MOBILE, "");
         PreferencesUtils.putString(this, Constants.PRE_PASSWORD, "");
         PreferencesUtils.putString(this, Constants.PRE_LAWYERID, "");
-
-//        setResult(MainActivity.REQUEST_CODE);
-//        finish();
-
         Intent intent = new Intent(PersonActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
+
 
     class RequestData extends AsyncTask<String, Void, LawyerItem> {
         private int request_code;
@@ -171,10 +226,21 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         @Override
         protected void onPostExecute(LawyerItem result) {
             super.onPostExecute(result);
-
-            if(result!=null&&result.isSuccess()){
-                LawyerItem.LawyerEntity entity=result.getLawyer();
-                nameTextView.setText(entity.getName());
+            if (result != null && result.isSuccess()) {
+                if(request_code==REQUEST_GETPERSON) {
+                    LawyerItem.LawyerEntity entity = result.getLawyer();
+                    nameTextView.setText(entity.getName());
+//                    firmTextView.setText(entity.g);
+                    genderTextView.setText(entity.getSex());
+                }else if(request_code==REQUEST_GETPERSON){
+                    nameTextView.setText(map.get("name"));
+                    firmTextView.setText(map.get("lawFirmName"));
+                    genderTextView.setText(map.get("sex"));
+                }
+            }else{
+                if(result!=null){
+                    ToastUtils.showToastShort(PersonActivity.this,result.getMessage());
+                }
             }
             mLoadingDialog.dismiss();
         }

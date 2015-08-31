@@ -7,4 +7,20 @@
         <item >分享APP</item>
         <item >给我好评</item>
     </string-array>
+
+
+    <string-array name="sex_items">
+        <item>未指定</item>
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+
+    <string-array name="edu_items">
+        <item>高中</item>
+        <item>大专</item>
+        <item>本科</item>
+        <item>硕士</item>
+        <item>博士</item>
+        <item>博士后</item>
+    </string-array>
 </resources>

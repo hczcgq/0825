@@ -58,6 +58,12 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.UpdatePasswordActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.UpdatePersonActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.WheelDialogAvtivity"
+            android:theme="@style/ActivityDialogStyle" >
+        </activity>
         <activity
             android:name=".activity.SelectDialogActivity"
             android:theme="@style/ActivityDialogStyle" />

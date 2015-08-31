@@ -77,4 +77,6 @@
     <string name="input_lawyer_gender">填写性别</string>
     <string name="input_lawyer_address">填写办公地址</string>
 
+    <string name="done">完成</string>
+
 </resources>

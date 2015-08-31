@@ -18,4 +18,7 @@ public class Constants {
     public static final String PRE_LAWYERID="PRE_LAWYERID"; //律师ID
 
     public static final String PRE_MAC="PER_MAC"; //信息校验
+
+    public static final int WHEEL_SEX=10;
+    public static final int WHEEL_EDU=11;
 }
