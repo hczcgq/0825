@@ -2,29 +2,56 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white" >
-
+    android:padding="5dp"
+    android:background="@color/background_color">
 
 
     <RelativeLayout
+        android:id="@+id/buttonRelativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="5dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:padding="5dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/greenroundbtn"/>
+            android:src="@drawable/greenroundbtn" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:gravity="center"
             android:text="听单中"
-            android:textSize="@dimen/text_20"
             android:textColor="@android:color/white"
-            android:gravity="center" />
-        </RelativeLayout>
+            android:textSize="@dimen/text_20" />
+    </RelativeLayout>
 
+    <ListView
+        android:id="@+id/mListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonRelativeLayout"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="#00000000"
+        android:divider="@color/background_color"
+        android:dividerHeight="5dp"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:scrollbars="none"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/noOrderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="亲，暂时没有人咨询哦！请稍等片刻，惊喜马上就到"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/input_text"
+        android:visibility="gone" />
 </RelativeLayout>

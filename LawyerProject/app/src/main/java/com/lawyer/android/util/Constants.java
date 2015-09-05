@@ -1,5 +1,7 @@
 package com.lawyer.android.util;
 
+import android.os.Environment;
+
 /**
  * Created by hm-soft on 2015/8/26.
  */
@@ -21,4 +23,17 @@ public class Constants {
 
     public static final int WHEEL_SEX=10;
     public static final int WHEEL_EDU=11;
+
+
+
+    public static final int TAKE_PHOTO=100;
+    public static final int TAKE_ALBUM=101;
+
+    // 拍照地址
+    public static final String TAKE_PHOTO_PATH = Environment
+            .getExternalStorageDirectory() + "/DCIM/Camera/";
+    // 发送图片地址
+    public static final String SEND_IMAGE_PATH = Environment
+            .getExternalStorageDirectory()
+            + "/lawyer/avater/";
 }

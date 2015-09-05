@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
-import com.lawyer.android.bean.LawyerItem;
+import com.lawyer.android.bean.PersonEntity;
 import com.lawyer.android.http.HttpHelper;
 import com.lawyer.android.http.httpUtils;
 import com.lawyer.android.util.Constants;
@@ -36,6 +36,8 @@ public class LoginActivity extends BaseUIActivity{
     private Intent intent;
 
     private TextView mobileEditText,passwordEditText;
+
+    public static final int REQUEST_REGISTER=10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,8 @@ public class LoginActivity extends BaseUIActivity{
      */
     public void RegisterClick(View view){
         intent=new Intent(this,RegisterActivity.class);
-        startActivity(intent);
+//        startActivity(intent);
+        startActivityForResult(intent,REQUEST_REGISTER);
     }
 
     /**
@@ -106,6 +109,13 @@ public class LoginActivity extends BaseUIActivity{
         startActivity(intent);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_REGISTER&&resultCode==REQUEST_REGISTER){
+            finish();
+        }
+    }
 
     /**
      * 加载数据
@@ -123,7 +133,7 @@ public class LoginActivity extends BaseUIActivity{
     /**
      * 登录请求
      */
-    class RequestData extends AsyncTask<String,Void,LawyerItem>{
+    class RequestData extends AsyncTask<String,Void,PersonEntity>{
 
         private  Map<String, String> map;
         public RequestData(Map<String, String> map) {
@@ -131,12 +141,12 @@ public class LoginActivity extends BaseUIActivity{
         }
 
         @Override
-        protected LawyerItem doInBackground(String... params) {
-            LawyerItem item =null;
+        protected PersonEntity doInBackground(String... params) {
+            PersonEntity item =null;
             try {
                 String result= HttpHelper.doRequestForString(LoginActivity.this,getString(R.string.base_url),HttpHelper.HTTP_POST ,map);
                 Log.e("---",result);
-                item = new Gson().fromJson(result, LawyerItem.class);
+                item = new Gson().fromJson(result, PersonEntity.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -144,16 +154,16 @@ public class LoginActivity extends BaseUIActivity{
         }
 
         @Override
-        protected void onPostExecute(LawyerItem result) {
+        protected void onPostExecute(PersonEntity result) {
             super.onPostExecute(result);
             mLoadingDialog.dismiss();
             if(result!=null){
-                if(result.isSuccess()){
+                if(result.getSuccess()){
                     //保存用户名和密码
                     PreferencesUtils.putString(LoginActivity.this, Constants.PRE_MOBILE, mobileEditText.getText().toString());
                     PreferencesUtils.putString(LoginActivity.this,Constants.PRE_PASSWORD,passwordEditText.getText().toString());
                     //保存律师ID
-                    PreferencesUtils.putString(LoginActivity.this, Constants.PRE_LAWYERID, result.getLawyer().getId());
+                    PreferencesUtils.putString(LoginActivity.this, Constants.PRE_LAWYERID, result.getLawyer().getId()+"");
                     PreferencesUtils.putString(LoginActivity.this,Constants.PRE_MAC,result.getLawyer().getMac());
                     finish();
                 }else{

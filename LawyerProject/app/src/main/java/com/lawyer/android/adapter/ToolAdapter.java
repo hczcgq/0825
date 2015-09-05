@@ -7,23 +7,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lawyer.android.R;
-import com.lawyer.android.bean.MenuItem;
-import com.lawyer.android.bean.ToolItem;
+import com.lawyer.android.bean.ToolEntity;
 
 import java.util.List;
 
 /**
  * Created by hm-soft on 2015/8/26.
  */
-public class ToolAdapter extends BaseAdapterHelpter<ToolItem>{
+public class ToolAdapter extends BaseAdapterHelpter<ToolEntity>{
 
 
     private Context context;
 
-    private List<ToolItem> datas;
+    private List<ToolEntity> datas;
 
 
-    public ToolAdapter(Context context, List<ToolItem> datas) {
+    public ToolAdapter(Context context, List<ToolEntity> datas) {
         super(context, datas);
         this.context=context;
         this.datas=datas;
@@ -36,7 +35,7 @@ public class ToolAdapter extends BaseAdapterHelpter<ToolItem>{
         ImageView iconImageView=holder.getView(R.id.iconImageView);
         TextView nameTextView=holder.getView(R.id.nameTextView);
         TextView messageTextView=holder.getView(R.id.messageTextView);
-        ToolItem item=datas.get(position);
+        ToolEntity item=datas.get(position);
         iconImageView.setImageResource(item.getIcon());
         nameTextView.setText(item.getName());
         messageTextView.setText(item.getMessage());

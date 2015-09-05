@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center|left"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:background="@drawable/list_corners_bg"
+    android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/orderNoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/input_text"
+        android:text="100232323232323"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/input_text"
+        android:text="产品名称：百元聘律师"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/productPriceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/input_text"
+        android:text="订单金额：100元"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/createTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/input_text"
+        android:text="06月26时 9:37"
+        android:padding="5dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_color"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <Button
+            android:id="@+id/DetailButton"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="@dimen/edittext_height"
+            android:background="@android:color/transparent"
+            android:text="@string/detail"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/button_text" />
+        <Button
+            android:id="@+id/orderButton"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="@dimen/edittext_height"
+            android:background="@android:color/transparent"
+            android:text="@string/order"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="@dimen/button_text" />
+    </LinearLayout>
+</LinearLayout>

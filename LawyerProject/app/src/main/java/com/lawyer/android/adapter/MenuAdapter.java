@@ -7,22 +7,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lawyer.android.R;
-import com.lawyer.android.bean.MenuItem;
+import com.lawyer.android.bean.MenuEntity;
 
 import java.util.List;
 
 /**
  * Created by hm-soft on 2015/8/26.
  */
-public class MenuAdapter extends BaseAdapterHelpter<MenuItem>{
+public class MenuAdapter extends BaseAdapterHelpter<MenuEntity>{
 
 
     private Context context;
 
-    private List<MenuItem> datas;
+    private List<MenuEntity> datas;
 
 
-    public MenuAdapter(Context context, List<MenuItem> datas) {
+    public MenuAdapter(Context context, List<MenuEntity> datas) {
         super(context, datas);
         this.context=context;
         this.datas=datas;
@@ -34,7 +34,7 @@ public class MenuAdapter extends BaseAdapterHelpter<MenuItem>{
                 parent, R.layout.view_menu_item, position);
         ImageView iconImageView=holder.getView(R.id.iconImageView);
         TextView nameTextView=holder.getView(R.id.nameTextView);
-        MenuItem item=datas.get(position);
+        MenuEntity item=datas.get(position);
         iconImageView.setImageResource(item.getIcon());
         nameTextView.setText(item.getName());
         return holder.getConvertView();

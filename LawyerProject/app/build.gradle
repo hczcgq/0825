@@ -23,7 +23,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile files('libs/httpmime-4.3.3.jar')
     compile project(':slidingmenulibrary2')
     compile project(':wheelviewlibrary')
+    compile project(':datetimelibrary')
+    compile files('libs/httpmime-4.2.1.jar')
 }

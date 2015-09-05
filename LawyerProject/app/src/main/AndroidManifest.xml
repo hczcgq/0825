@@ -62,11 +62,19 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.WheelDialogAvtivity"
-            android:theme="@style/ActivityDialogStyle" >
+            android:theme="@style/ActivityDialogStyle"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activity.SelectDialogActivity"
-            android:theme="@style/ActivityDialogStyle" />
+            android:theme="@style/ActivityDialogStyle"
+            android:screenOrientation="portrait"/>
+        <!--日期-->
+        <activity
+            android:name=".activity.DateDialogAvtivity"
+            android:theme="@style/ActivityDialogStyle2"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

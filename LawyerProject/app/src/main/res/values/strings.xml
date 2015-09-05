@@ -32,7 +32,8 @@
     <string name="save">保存</string>
     <string name="work_on">上班</string>
     <string name="work_off">下班</string>
-    
+
+    <string name="menu_main">听单</string>
     <string name="menu_order">我的订单</string>
     <string name="menu_message">我的消息</string>
     <string name="menu_tool">法律工具</string>
@@ -57,26 +58,28 @@
     <string name="take_photo">拍照</string>
     <string name="choose_photo">相册</string>
 
-    <string name="lawyer_name">律师姓名</string>
-    <string name="lawyer_firm">执业律所</string>
-    <string name="lawyer_ct_number">执业证号</string>
-    <string name="lawyer_ct_year">执业年限</string>
-    <string name="lawyer_ct_type">执业证类别</string>
-    <string name="lawyer_des">律师介绍</string>
-    <string name="lawyer_edu">学历</string>
-    <string name="lawyer_gender">性别</string>
-    <string name="lawyer_address">办公地址</string>
+    <string name="lawyer_name">姓名</string>
+    <string name="lawyer_birthday">出生年月</string>
+    <string name="lawyer_sex">性别</string>
+    <string name="lawyer_first_practice_time">首次执业日期</string>
+    <string name="lawyer_expertIn">擅长领域</string>
+    <string name="lawyer_mobile">联系手机</string>
+    <string name="lawyer_tel">联系电话</string>
+    <string name="lawyer_certificate_no">执业证书编号</string>
+    <string name="lawyer_idcard">身份证号码</string>
+    <string name="lawyer_firmName">律所名称</string>
 
     <string name="input_lawyer_name">填写律师姓名</string>
-    <string name="input_lawyer_firm">填写执业律所</string>
-    <string name="input_lawyer_ct_number">填写执业证号</string>
-    <string name="input_lawyer_ct_year">填写执业年限</string>
-    <string name="input_lawyer_ct_type">填写执业证类别</string>
-    <string name="input_lawyer_des">填写律师介绍</string>
-    <string name="input_lawyer_edu">填写学历</string>
-    <string name="input_lawyer_gender">填写性别</string>
-    <string name="input_lawyer_address">填写办公地址</string>
+    <string name="input_lawyer_expertIn">填写擅长领域</string>
+    <string name="input_lawyer_mobile">填写联系手机</string>
+    <string name="input_lawyer_tel">填写联系电话</string>
+    <string name="input_lawyer_certificate_no">填写执业证书编号</string>
+    <string name="input_lawyer_idcard">填写身份证号码</string>
+    <string name="input_lawyer_firmName">填写律所名称</string>
 
     <string name="done">完成</string>
+
+    <string name="detail">详情</string>
+    <string name="order">接单</string>
 
 </resources>

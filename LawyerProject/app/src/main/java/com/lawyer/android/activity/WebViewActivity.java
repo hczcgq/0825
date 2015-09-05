@@ -9,7 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
-import com.lawyer.android.bean.ToolItem;
+import com.lawyer.android.bean.ToolEntity;
 import com.lawyer.android.util.LoadingDialog;
 
 /**
@@ -17,7 +17,7 @@ import com.lawyer.android.util.LoadingDialog;
  */
 public class WebViewActivity extends BaseUIActivity{
 
-    private ToolItem item;
+    private ToolEntity item;
     private WebView webView;
 
     private LoadingDialog mLoadingDialog;
@@ -31,7 +31,7 @@ public class WebViewActivity extends BaseUIActivity{
         webView = (WebView) findViewById(R.id.helpWebView);
         mLoadingDialog = new LoadingDialog(this);
 
-        item= (ToolItem) getIntent().getSerializableExtra("item");
+        item= (ToolEntity) getIntent().getSerializableExtra("item");
         if(item!=null){
             setHeadTitle(item.getName());
             showWebView(item.getUrl());

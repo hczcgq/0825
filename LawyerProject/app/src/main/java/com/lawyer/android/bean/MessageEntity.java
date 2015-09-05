@@ -3,7 +3,7 @@ package com.lawyer.android.bean;
 /**
  * Created by hm-soft on 2015/8/27.
  */
-public class MessageItem {
+public class MessageEntity {
 
     private String id;
     private String title;
@@ -14,7 +14,7 @@ public class MessageItem {
     private String createDate;
 
 
-    public MessageItem(String id, String title, String messageUrl, String content, String imgURL, String messageType, String createDate) {
+    public MessageEntity(String id, String title, String messageUrl, String content, String imgURL, String messageType, String createDate) {
         this.id = id;
         this.title = title;
         this.messageUrl = messageUrl;

@@ -1,7 +1,5 @@
 package com.lawyer.android.http;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
@@ -33,7 +31,6 @@ public class httpUtils {
         }
         // 字符串末尾添加appSecret
         pa.append(appSecret);
-        Log.e("--", "待签名内容：" + pa.toString());
         try {
             byte[] sha1Digest = getSHA1Digest(pa.toString());
             String sign = byte2hex(sha1Digest);

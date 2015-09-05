@@ -4,7 +4,7 @@ package com.lawyer.android.bean;
  * 返回数据实体
  * Created by chenguoquan on 8/29/15.
  */
-public class SuccessItem {
+public class SuccessEntity {
 
 
     /**

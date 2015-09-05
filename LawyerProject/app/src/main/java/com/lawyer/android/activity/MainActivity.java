@@ -16,6 +16,7 @@ import com.lawyer.android.R;
 import com.lawyer.android.fragment.FragmentAboutUs;
 import com.lawyer.android.fragment.FragmentHelpCenter;
 import com.lawyer.android.fragment.FragmentLawyerTool;
+import com.lawyer.android.fragment.FragmentMain;
 import com.lawyer.android.fragment.FragmentMenu;
 import com.lawyer.android.fragment.FragmentMessage;
 import com.lawyer.android.fragment.FragmentOrder;
@@ -61,7 +62,7 @@ public class MainActivity extends SlidingFragmentActivity implements FragmentMen
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.left_menu, new FragmentMenu());
-        fragmentTransaction.replace(R.id.content, new FragmentOrder());
+        fragmentTransaction.replace(R.id.content, new FragmentMain());
         fragmentTransaction.commit();
 
         // Get menu button
@@ -128,7 +129,9 @@ public class MainActivity extends SlidingFragmentActivity implements FragmentMen
         FragmentTransaction ft = fm.beginTransaction();
         Fragment fragment = null;
 
-        if (title == R.string.menu_order) {
+        if(title == R.string.menu_main) {
+            fragment = new FragmentMain();
+        }else if (title == R.string.menu_order) {
             fragment = new FragmentOrder();
         } else if (title == R.string.menu_tool) {
             fragment = new FragmentLawyerTool();

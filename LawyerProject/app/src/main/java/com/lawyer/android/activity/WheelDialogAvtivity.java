@@ -47,12 +47,9 @@ public class WheelDialogAvtivity extends Activity {
         tag = getIntent().getIntExtra("Tag", 0);
 
         if (tag == Constants.WHEEL_SEX) {
-            title_name=getString(R.string.lawyer_gender);
+            title_name=getString(R.string.lawyer_sex);
             array = getResources()
                     .getStringArray(R.array.sex_items);
-        }else if (tag == Constants.WHEEL_EDU) {
-            title_name = getString(R.string.lawyer_edu);
-            array = getResources().getStringArray(R.array.edu_items);
         }
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText(title_name);
@@ -72,9 +69,7 @@ public class WheelDialogAvtivity extends Activity {
                 Intent intent = new Intent();
                 intent.putExtra("name", name);
                 if (tag == Constants.WHEEL_SEX) {
-                    setResult(PersonActivity.CODE_GENDER, intent);
-                }else if (tag == Constants.WHEEL_EDU) {
-                    setResult(PersonActivity.CODE_EDU, intent);
+                    setResult(PersonActivity.CODE_SEX, intent);
                 }
                 onfinish();
             }

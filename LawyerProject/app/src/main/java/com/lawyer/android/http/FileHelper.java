@@ -1,7 +1,7 @@
 package com.lawyer.android.http;
 
 import android.content.Context;
-
+import android.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.ClientProtocolException;
@@ -17,7 +17,6 @@ import org.apache.http.conn.params.ConnPerRouteBean;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
-
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
@@ -29,19 +28,24 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
-
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by hm-soft on 2015/8/27.
@@ -58,6 +62,15 @@ public class FileHelper {
 
     private static final String DEFAULT_PARAMS_ENCODING = "UTF-8";
 
+    private static int readTimeOut = 10 * 1000; // 读取超时
+    private static int connectTimeout = 10 * 1000; // 超时时间
+    private static int requestTime = 0; //请求使用多长时间
+    private static final String CHARSET = "UTF-8"; // 设置编码
+    private static final String BOUNDARY = UUID.randomUUID().toString(); // 边界标识 随机生成
+    private static final String PREFIX = "--";
+    private static final String LINE_END = "\r\n";
+    private static final String CONTENT_TYPE = "multipart/form-data"; // 内容类型
+
 
     /**
      * 上传文件
@@ -68,7 +81,7 @@ public class FileHelper {
      * @return
      */
     public static String uploadHttpClient(Context context, String url,
-                                          HashMap<String, String> map, String filepath) {
+                                          Map<String, String> map, String filepath) {
         String result = null;
         HttpClient client = getHttpClient(context);
         HttpPost post = new HttpPost(url);
@@ -94,7 +107,7 @@ public class FileHelper {
         } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
         }
-        entity.addPart("datafile", fileBody);
+        entity.addPart("photo", fileBody);
         post.setEntity(entity);
         try {
             HttpResponse response = client.execute(post);
@@ -252,5 +265,169 @@ public class FileHelper {
             e.printStackTrace();
         }
         return buffer.toString();
+    }
+
+    /**
+     * android上传文件到服务器
+     *
+     * @param filePath   需要上传的文件的路径
+     * @param fileKey    在网页上<input type=file name=xxx/> xxx就是这里的fileKey
+     * @param RequestURL 请求的URL
+     */
+    public static String uploadFile(String filePath, String fileKey, String RequestURL,
+                             Map<String, String> param) {
+        String result = "";
+        if (filePath == null) {
+            result = "文件不存在";
+        }
+        try {
+            File file = new File(filePath);
+            result = uploadFile(file, fileKey, RequestURL, param);
+        } catch (Exception e) {
+            result = "文件不存在";
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * android上传文件到服务器
+     *
+     * @param file       需要上传的文件
+     * @param fileKey    在网页上<input type=file name=xxx/> xxx就是这里的fileKey
+     * @param RequestURL 请求的URL
+     */
+    public static String uploadFile(final File file, final String fileKey,
+                             final String RequestURL, final Map<String, String> param) {
+        String result;
+        if (file == null || (!file.exists())) {
+            result = "文件不存在";
+        }
+
+        Log.i("---", "请求的URL=" + RequestURL);
+        Log.i("---", "请求的fileName=" + file.getName());
+        Log.i("---", "请求的fileKey=" + fileKey);
+
+        result = toUploadFile(file, fileKey, RequestURL, param);
+        return result;
+
+
+    }
+
+    public static String toUploadFile(File file, String fileKey, String RequestURL,
+                                Map<String, String> param) {
+
+        String result = null;
+        requestTime = 0;
+
+        long requestTime = System.currentTimeMillis();
+        long responseTime = 0;
+
+        try {
+            URL url = new URL(RequestURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(readTimeOut);
+            conn.setConnectTimeout(connectTimeout);
+            conn.setDoInput(true); // 允许输入流
+            conn.setDoOutput(true); // 允许输出流
+            conn.setUseCaches(false); // 不允许使用缓存
+            conn.setRequestMethod("POST"); // 请求方式
+            conn.setRequestProperty("Charset", CHARSET); // 设置编码
+            conn.setRequestProperty("connection", "keep-alive");
+            conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
+            conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
+//          conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            /**
+             * 当文件不为空，把文件包装并且上传
+             */
+            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+            StringBuffer sb = null;
+            String params = "";
+
+            /***
+             * 以下是用于上传参数
+             */
+            if (param != null && param.size() > 0) {
+                Iterator<String> it = param.keySet().iterator();
+                while (it.hasNext()) {
+                    sb = null;
+                    sb = new StringBuffer();
+                    String key = it.next();
+                    String value = param.get(key);
+                    sb.append(PREFIX).append(BOUNDARY).append(LINE_END);
+                    sb.append("Content-Disposition: form-data; name=\"").append(key).append("\"").append(LINE_END).append(LINE_END);
+                    sb.append(value).append(LINE_END);
+                    params = sb.toString();
+                    Log.i("---", key + "=" + params + "##");
+                    dos.write(params.getBytes());
+//                  dos.flush();
+                }
+            }
+
+            sb = null;
+            params = null;
+            sb = new StringBuffer();
+            /**
+             * 这里重点注意： name里面的值为服务器端需要key 只有这个key 才可以得到对应的文件
+             * filename是文件的名字，包含后缀名的 比如:abc.png
+             */
+            sb.append(PREFIX).append(BOUNDARY).append(LINE_END);
+            sb.append("Content-Disposition:form-data; name=\"" + fileKey
+                    + "\"; filename=\"" + file.getName() + "\"" + LINE_END);
+            sb.append("Content-Type:image/pjpeg" + LINE_END); // 这里配置的Content-type很重要的 ，用于服务器端辨别文件的类型的
+            sb.append(LINE_END);
+            params = sb.toString();
+            sb = null;
+
+            Log.i("---", file.getName() + "=" + params + "##");
+            dos.write(params.getBytes());
+            /**上传文件*/
+            InputStream is = new FileInputStream(file);
+//            onUploadProcessListener.initUpload((int) file.length());
+            byte[] bytes = new byte[1024];
+            int len = 0;
+            int curLen = 0;
+            while ((len = is.read(bytes)) != -1) {
+                curLen += len;
+                dos.write(bytes, 0, len);
+//                onUploadProcessListener.onUploadProcess(curLen);
+            }
+            is.close();
+
+            dos.write(LINE_END.getBytes());
+            byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END).getBytes();
+            dos.write(end_data);
+            dos.flush();
+//
+//          dos.write(tempOutputStream.toByteArray());
+            /**
+             * 获取响应码 200=成功 当响应成功，获取响应的流
+             */
+            int res = conn.getResponseCode();
+            responseTime = System.currentTimeMillis();
+            requestTime = (int) ((responseTime - requestTime) / 1000);
+            Log.e("---", "response code:" + res);
+            if (res == 200) {
+                Log.e("---", "request success");
+                InputStream input = conn.getInputStream();
+                StringBuffer sb1 = new StringBuffer();
+                int ss;
+                while ((ss = input.read()) != -1) {
+                    sb1.append((char) ss);
+                }
+                result = sb1.toString();
+                Log.e("---", "result : " + result);
+            } else {
+                result = "上传失败！";
+            }
+        } catch (MalformedURLException e) {
+            result = e.getMessage();
+            e.printStackTrace();
+        } catch (IOException e) {
+            result = e.getMessage();
+            e.printStackTrace();
+        }
+        return result;
     }
 }

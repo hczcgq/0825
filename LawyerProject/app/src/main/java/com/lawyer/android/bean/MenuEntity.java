@@ -4,12 +4,12 @@ package com.lawyer.android.bean;
  * 左侧菜单实体
  * Created by hm-soft on 2015/8/26.
  */
-public class MenuItem {
+public class MenuEntity {
 
     private int icon;
     private int name;
 
-    public MenuItem(int icon, int name) {
+    public MenuEntity(int icon, int name) {
         this.icon = icon;
         this.name = name;
     }

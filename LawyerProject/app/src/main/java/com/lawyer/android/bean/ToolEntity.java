@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 法律工具实体
  * Created by hm-soft on 2015/8/26.
  */
-public class ToolItem implements Serializable{
+public class ToolEntity implements Serializable{
 
     private int icon;
     private String name;
@@ -14,7 +14,7 @@ public class ToolItem implements Serializable{
     private String url;
 
 
-    public ToolItem(int icon, String name, String message, String url) {
+    public ToolEntity(int icon, String name, String message, String url) {
         this.icon = icon;
         this.name = name;
         this.message = message;

@@ -18,7 +18,7 @@ import com.lawyer.android.R;
 import com.lawyer.android.activity.LoginActivity;
 import com.lawyer.android.activity.PersonActivity;
 import com.lawyer.android.adapter.MenuAdapter;
-import com.lawyer.android.bean.MenuItem;
+import com.lawyer.android.bean.MenuEntity;
 import com.lawyer.android.util.Constants;
 import com.lawyer.android.util.DialogUtil;
 import com.lawyer.android.util.PreferencesUtils;
@@ -33,7 +33,7 @@ import java.util.List;
 public class FragmentMenu extends Fragment {
 
     private ListView mListView;
-    private List<MenuItem> menuItems;
+    private List<MenuEntity> menuItems;
     private ImageView avaterImageView;
     public FragmentMenu() {
 
@@ -78,11 +78,6 @@ public class FragmentMenu extends Fragment {
         avaterImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(getActivity(),PersonActivity.class);
-//                startActivity(intent);
-//                startActivityForResult(intent, MainActivity.REQUEST_CODE);
-
-
                 String lawyerId= PreferencesUtils.getString(getActivity(), Constants.PRE_LAWYERID, null);
                 String mobile=PreferencesUtils.getString(getActivity(), Constants.PRE_MOBILE, null);
                 if(StringUtils.isEmpty(lawyerId)&&StringUtils.isEmpty(mobile)){
@@ -97,7 +92,6 @@ public class FragmentMenu extends Fragment {
                 }else{
                     Intent intent=new Intent(getActivity(),PersonActivity.class);
                     startActivity(intent);
-//                    startActivityForResult(intent,REQUEST_CODE);
                 }
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -113,13 +107,14 @@ public class FragmentMenu extends Fragment {
      * 初始化功能列表数据
      * @return
      */
-    private List<MenuItem> getMenuItems(){
-        List<MenuItem> list=new ArrayList<>();
-        list.add(new MenuItem(R.drawable.order,R.string.menu_order));
-        list.add(new MenuItem(R.drawable.tool,R.string.menu_tool));
-        list.add(new MenuItem(R.drawable.message,R.string.menu_message));
-        list.add(new MenuItem(R.drawable.help,R.string.menu_help));
-        list.add(new MenuItem(R.drawable.aboutus,R.string.menu_about));
+    private List<MenuEntity> getMenuItems(){
+        List<MenuEntity> list=new ArrayList<>();
+        list.add(new MenuEntity(R.drawable.order,R.string.menu_main));
+        list.add(new MenuEntity(R.drawable.order,R.string.menu_order));
+        list.add(new MenuEntity(R.drawable.tool,R.string.menu_tool));
+        list.add(new MenuEntity(R.drawable.message,R.string.menu_message));
+        list.add(new MenuEntity(R.drawable.help,R.string.menu_help));
+        list.add(new MenuEntity(R.drawable.aboutus,R.string.menu_about));
         return list;
     }
 

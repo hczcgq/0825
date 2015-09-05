@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
-import com.lawyer.android.bean.SuccessItem;
+import com.lawyer.android.bean.SuccessEntity;
 import com.lawyer.android.http.HttpHelper;
 import com.lawyer.android.http.httpUtils;
 import com.lawyer.android.util.Constants;
@@ -133,7 +133,7 @@ public class UpdatePasswordActivity extends BaseUIActivity{
     /**
      * 请求数据
      */
-    class RequestData extends AsyncTask<String,Void ,SuccessItem> {
+    class RequestData extends AsyncTask<String,Void ,SuccessEntity> {
         private Map<String, String> map;
 
         public RequestData(Map<String, String> map) {
@@ -141,11 +141,11 @@ public class UpdatePasswordActivity extends BaseUIActivity{
         }
 
         @Override
-        protected SuccessItem doInBackground(String... params) {
-            SuccessItem item=null;
+        protected SuccessEntity doInBackground(String... params) {
+            SuccessEntity item=null;
             try {
                 String result= HttpHelper.doRequestForString(UpdatePasswordActivity.this, getString(R.string.base_url), HttpHelper.HTTP_POST, map);
-                item=new Gson().fromJson(result,SuccessItem.class);
+                item=new Gson().fromJson(result,SuccessEntity.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -153,7 +153,7 @@ public class UpdatePasswordActivity extends BaseUIActivity{
         }
 
         @Override
-        protected void onPostExecute(SuccessItem result) {
+        protected void onPostExecute(SuccessEntity result) {
             super.onPostExecute(result);
             mLoadingDialog.dismiss();
             if(result!=null){

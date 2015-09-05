@@ -11,6 +11,8 @@
     <string name="lawyer_message_get_url">message.get</string>
     <string name="lawyer_update_password_url">lawyer.chPwd</string>
     <string name="lawyer_firm_get_url">lawFirm.get</string>
+    <string name="lawyer_order_list_url">order.list</string>
+    <string name="lawyer_order_newlist_url">order.newlist</string>
 
 
  </resources>
