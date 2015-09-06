@@ -2,7 +2,10 @@ package com.lawyer.android.activity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -19,6 +22,8 @@ import com.lawyer.android.util.ToastUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by hm-soft on 2015/8/26.
@@ -33,7 +38,7 @@ public class RegisterActivity extends BaseUIActivity{
 
     private LoadingDialog mLoadingDialog;
     private EditText mobileEditText,verifyEditText,passwordEditText,confirmPasswordEditText;
-
+    private Button vevifyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class RegisterActivity extends BaseUIActivity{
         verifyEditText= (EditText) findViewById(R.id.verifyEditText);
         passwordEditText= (EditText) findViewById(R.id.passwordEditText);
         confirmPasswordEditText= (EditText) findViewById(R.id.confirmPasswordEditText);
+        vevifyButton= (Button) findViewById(R.id.vevifyButton);
     }
 
     /**
@@ -76,6 +82,9 @@ public class RegisterActivity extends BaseUIActivity{
             return;
         }
 
+        startTimer();
+        addMessageHandler();
+
 
         Map<String, String> map=new HashMap<String, String>();
         map.put("v","1.0");
@@ -85,7 +94,9 @@ public class RegisterActivity extends BaseUIActivity{
         map.put("cellPhone", mobile);
         map.put("userType", "LAWYER");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
-        loadDate(REQUEST_VALIDATIONCODE,map);
+        loadDate(REQUEST_VALIDATIONCODE, map);
+
+
 
     }
 
@@ -198,5 +209,75 @@ public class RegisterActivity extends BaseUIActivity{
             super.onPreExecute();
             mLoadingDialog.dialogShow();
         }
+    }
+
+    private Handler iHandler;
+
+    private Timer timer = null;
+
+    private TimerTask timerTask = null;
+
+    private final int LOAD_PROGRESS = 0;
+
+    private final int CLOSE_PROGRESS = 1;
+
+    private int recLen = 60;
+
+    private void addMessageHandler() {
+        iHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case LOAD_PROGRESS:
+                        vevifyButton.setText(recLen+"");
+                        vevifyButton.setEnabled(false);
+                        if (recLen == 0) {
+                            closeTimer();
+                        }
+                        break;
+                    case CLOSE_PROGRESS:
+                        vevifyButton.setText(getString(R.string.verify));
+                        vevifyButton.setEnabled(true);
+                        break;
+                }
+                super.handleMessage(msg);
+            }
+        };
+    }
+
+
+    /**
+     * 开始计时器
+     */
+    private void startTimer() {
+        if (timerTask == null) {
+            timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    recLen--;
+                    Message msg = new Message();
+                    msg.what = LOAD_PROGRESS;
+                    msg.arg1 = recLen;
+                    iHandler.sendMessage(msg);
+                }
+            };
+            timer = new Timer();
+            timer.schedule(timerTask, 1000, 1000);
+        }
+    }
+
+    /**
+     * 关闭计时器
+     */
+    private void closeTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        if (timerTask != null) {
+            timerTask = null;
+        }
+        recLen = 61;
+        iHandler.sendEmptyMessage(CLOSE_PROGRESS);
     }
 }

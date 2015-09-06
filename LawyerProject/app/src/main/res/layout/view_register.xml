@@ -36,6 +36,7 @@
             android:hint="@string/login_mobile"
             android:inputType="number"
             android:padding="3dip"
+            android:maxLength="11"
             android:textColorHint="#aab2be"
             android:textColor="@color/edittext_input_color"
             android:textSize="@dimen/input_text"
