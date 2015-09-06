@@ -101,12 +101,7 @@ public class FileHelper {
                 e.printStackTrace();
             }
         }
-        try {
-            entity.addPart("Content-Type", new StringBody(
-                    "multipart/form-data;charset=utf-8"));
-        } catch (UnsupportedEncodingException e1) {
-            e1.printStackTrace();
-        }
+
         entity.addPart("photo", fileBody);
         post.setEntity(entity);
         try {

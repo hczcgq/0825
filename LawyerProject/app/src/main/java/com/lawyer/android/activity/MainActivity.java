@@ -14,6 +14,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.lib.SlidingFragmentActivity;
 import com.lawyer.android.R;
 import com.lawyer.android.fragment.FragmentAboutUs;
+import com.lawyer.android.fragment.FragmentAdvice;
 import com.lawyer.android.fragment.FragmentHelpCenter;
 import com.lawyer.android.fragment.FragmentLawyerTool;
 import com.lawyer.android.fragment.FragmentMain;
@@ -97,7 +98,6 @@ public class MainActivity extends SlidingFragmentActivity implements FragmentMen
                 }else{
                     Intent intent=new Intent(MainActivity.this,PersonActivity.class);
                     startActivity(intent);
-//                    startActivityForResult(intent,REQUEST_CODE);
                 }
 
             }
@@ -133,7 +133,9 @@ public class MainActivity extends SlidingFragmentActivity implements FragmentMen
             fragment = new FragmentMain();
         }else if (title == R.string.menu_order) {
             fragment = new FragmentOrder();
-        } else if (title == R.string.menu_tool) {
+        } else if (title == R.string.menu_advice) {
+            fragment = new FragmentAdvice();
+        }else if (title == R.string.menu_tool) {
             fragment = new FragmentLawyerTool();
         } else if (title == R.string.menu_message) {
             fragment = new FragmentMessage();

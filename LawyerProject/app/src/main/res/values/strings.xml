@@ -35,6 +35,7 @@
 
     <string name="menu_main">听单</string>
     <string name="menu_order">我的订单</string>
+    <string name="menu_advice">我的咨询</string>
     <string name="menu_message">我的消息</string>
     <string name="menu_tool">法律工具</string>
     <string name="menu_help">帮助中心</string>
@@ -54,6 +55,7 @@
     <string name="input_password_not_eque">两次输入的密码不一致</string>
 
     <string name="person">账户信息</string>
+    <string name="user">用户信息</string>
 
     <string name="take_photo">拍照</string>
     <string name="choose_photo">相册</string>

@@ -3,7 +3,6 @@ package com.lawyer.android.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -59,13 +58,12 @@ public class DateDialogAvtivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-//                String dayString=datePicker.getYear()+"-"+(datePicker.getMonth()+1)+"-"+datePicker.getDay();
-                Calendar calendar=Calendar.getInstance();
-                calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDay());
+                String dayString=datePicker.getYear()+"-"+(datePicker.getMonth()+1)+"-"+datePicker.getDay();
+//                Calendar calendar=Calendar.getInstance();
+//                calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDay());
                 Intent intent=new Intent();
-                intent.putExtra("day", calendar.getTimeInMillis());
+                intent.putExtra("day", dayString);
                 setResult(PersonActivity.CODE_DATE, intent);
-                Log.e("---",AppUtils.formatLongToDate(calendar.getTimeInMillis()));
                 finish();
             }
         });

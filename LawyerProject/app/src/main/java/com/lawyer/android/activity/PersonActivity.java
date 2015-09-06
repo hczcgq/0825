@@ -20,6 +20,8 @@ import com.lawyer.android.util.LoadingDialog;
 import com.lawyer.android.util.PreferencesUtils;
 import com.lawyer.android.util.StringUtils;
 import com.lawyer.android.util.ToastUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,10 +63,13 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
 
     private PersonEntity.LawyerEntity temLawyerEntity;
 
+    private ImageLoader imageLoader;
+
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.view_person);
+        imageLoader = ImageLoader.getInstance();
 
         initView();
         initEvent();
@@ -235,8 +240,8 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
             map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
             loadDate(REQUEST_UPDATEPERSON, map);
         } else if (requestCode == CODE_BIRTHDAY && resultCode == CODE_DATE) {
-            long birthday=data.getLongExtra("day", 0);
-            birthdayTextView.setText(AppUtils.formatLongToDate(Long.valueOf(birthday)));
+            String birthday=data.getStringExtra("day");
+            birthdayTextView.setText(birthday);
             map.put("birthday", String.valueOf(birthday));
             map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
             loadDate(REQUEST_UPDATEPERSON, map);
@@ -247,8 +252,8 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
             map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
             loadDate(REQUEST_UPDATEPERSON, map);
         } else if (requestCode == CODE_FIRST_PRACTICETIME && resultCode == CODE_DATE) {
-            long firstPracticeTime=data.getLongExtra("day", 0);
-            firstPracticeTimeTextView.setText(AppUtils.formatLongToDate(Long.valueOf(firstPracticeTime)));
+            String firstPracticeTime=data.getStringExtra("day");
+            firstPracticeTimeTextView.setText(firstPracticeTime);
             map.put("firstPracticeTime", String.valueOf(firstPracticeTime));
             map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
             loadDate(REQUEST_UPDATEPERSON, map);
@@ -340,8 +345,6 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
             try {
                 if (request_code == REQUEST_UPDATEPERSONAVATER) {
                     String result = FileHelper.uploadHttpClient(PersonActivity.this, getString(R.string.base_url), map, image_path);
-//                    String result=FileHelper.uploadFile(image_path,"pic",getString(R.string.base_url),map);
-                    Log.e("---",result);
                     item = new Gson().fromJson(result, PersonEntity.class);
                 } else {
                     String result = HttpHelper.doRequestForString(PersonActivity.this, getString(R.string.base_url), HttpHelper.HTTP_POST, map);
@@ -360,7 +363,7 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
                 if (request_code == REQUEST_GETPERSON) {
                     PersonEntity.LawyerEntity entity = result.getLawyer();
                     temLawyerEntity=entity;
-                    showContent(entity);
+                    showContent(entity,request_code);
                 } else if (request_code == REQUEST_UPDATEPERSON) {
                     ToastUtils.showToastShort(PersonActivity.this, "修改成功");
                 }
@@ -368,8 +371,8 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
                 if (result != null) {
                     ToastUtils.showToastShort(PersonActivity.this, result.getMessage());
                 }
-                if (request_code == REQUEST_GETPERSON) {
-                    showContent(temLawyerEntity);
+                if (request_code == REQUEST_UPDATEPERSON) {
+                    showContent(temLawyerEntity,request_code);
                 }
             }
             mLoadingDialog.dismiss();
@@ -382,14 +385,14 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         }
     }
 
-    private void showContent(PersonEntity.LawyerEntity entity){
-        if(entity!=null){
+    private void showContent(PersonEntity.LawyerEntity entity,int request_code){
+        if(entity!=null) {
             nameTextView.setText(entity.getName());
-            if(entity.getBirthday()!=0) {
+            if (entity.getBirthday() != 0) {
                 birthdayTextView.setText(AppUtils.formatLongToDate(entity.getBirthday()));
             }
             sexTextView.setText(entity.getSex());
-            if(entity.getFirstPracticeTime()!=0) {
+            if (entity.getFirstPracticeTime() != 0) {
                 firstPracticeTimeTextView.setText(AppUtils.formatLongToDate(entity.getFirstPracticeTime()));
             }
             expertInTextView.setText(entity.getExpertIn());
@@ -397,7 +400,13 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
             telTextView.setText(entity.getTel());
             lawyerCertificateNoTextView.setText(entity.getLawyerCertificateNo());
             idCardTextView.setText(entity.getIdCard());
-            //                    lawFirmNameTextView.setText(entity.get);
+
+            if (request_code == REQUEST_UPDATEPERSONAVATER) {
+                String url="file:///"+image_path;
+                imageLoader.displayImage(url, avaterImageView, options);
+            } else {
+                imageLoader.displayImage(entity.getUserLogoUrl(), avaterImageView, options);
+            }
         }
     }
 }

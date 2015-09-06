@@ -78,6 +78,7 @@ public class PersonEntity implements Serializable{
         private String status;
         private String tel;
         private long updateDate;
+        private String userLogoUrl;
 
         public void setBirthday(long birthday) {
             this.birthday = birthday;
@@ -213,6 +214,14 @@ public class PersonEntity implements Serializable{
 
         public long getUpdateDate() {
             return updateDate;
+        }
+
+        public String getUserLogoUrl() {
+            return userLogoUrl;
+        }
+
+        public void setUserLogoUrl(String userLogoUrl) {
+            this.userLogoUrl = userLogoUrl;
         }
     }
 }

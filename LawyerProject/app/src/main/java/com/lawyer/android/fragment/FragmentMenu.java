@@ -111,6 +111,7 @@ public class FragmentMenu extends Fragment {
         List<MenuEntity> list=new ArrayList<>();
         list.add(new MenuEntity(R.drawable.order,R.string.menu_main));
         list.add(new MenuEntity(R.drawable.order,R.string.menu_order));
+        list.add(new MenuEntity(R.drawable.order,R.string.menu_advice));
         list.add(new MenuEntity(R.drawable.tool,R.string.menu_tool));
         list.add(new MenuEntity(R.drawable.message,R.string.menu_message));
         list.add(new MenuEntity(R.drawable.help,R.string.menu_help));
