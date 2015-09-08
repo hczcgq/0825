@@ -2,6 +2,7 @@ package com.lawyer.android.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -47,13 +48,20 @@ public class AdviceAdapter extends BaseAdapterHelpter<AdviceEntity.ConsultsEntit
         mobileTextView.setText(entity.getUser().getMobile());
         lawyerQuestionBigTextView.setText("法律问题大类：" + entity.getCategory().getParent().getName());
         lawyerQuestionSmallTextView.setText("法律问题小类：" + entity.getCategory().getName());
-        createTimeTextView.setText(AppUtils.formatLongToDate(entity.getCreateDate()));
+        createTimeTextView.setText("订单时间："+AppUtils.formatLongToDate(entity.getCreateDate()));
 
         userNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, UserActivity.class);
                 intent.putExtra("User", entity.getUser());
+                context.startActivity(intent);
+            }
+        });
+        mobileTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + entity.getUser().getMobile()));
                 context.startActivity(intent);
             }
         });

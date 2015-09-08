@@ -122,6 +122,13 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
     }
 
     private void initData() {
+        image_path=Constants.SEND_IMAGE_PATH + "temp.jpg";
+        if(!StringUtils.isEmpty(image_path)){
+            String url="file:///"+image_path;
+            imageLoader.displayImage(url, avaterImageView, options);
+        }
+
+
         lawyerID = PreferencesUtils.getString(this, Constants.PRE_LAWYERID);
         Map<String, String> map = new HashMap<String, String>();
         map.put("v", "1.0");
@@ -229,6 +236,9 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         map.put("mac", mac);
         if (requestCode == CODE_AVATER && resultCode == CODE_AVATER) { //头像
             image_path = data.getStringExtra("image");
+            if(StringUtils.isEmpty(image_path)){
+                return;
+            }
             map.put("photo", "photo");
             map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
             loadDate(REQUEST_UPDATEPERSONAVATER, map);
@@ -366,6 +376,9 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
                     showContent(entity,request_code);
                 } else if (request_code == REQUEST_UPDATEPERSON) {
                     ToastUtils.showToastShort(PersonActivity.this, "修改成功");
+                }else if (request_code == REQUEST_UPDATEPERSONAVATER) {
+                    String url="file:///"+Constants.SEND_IMAGE_PATH + "temp.jpg";;
+                    imageLoader.displayImage(url, avaterImageView, options);
                 }
             } else {
                 if (result != null) {
@@ -389,11 +402,11 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         if(entity!=null) {
             nameTextView.setText(entity.getName());
             if (entity.getBirthday() != 0) {
-                birthdayTextView.setText(AppUtils.formatLongToDate(entity.getBirthday()));
+                birthdayTextView.setText(AppUtils.formatValidLongToDate(entity.getBirthday(),0));
             }
             sexTextView.setText(entity.getSex());
             if (entity.getFirstPracticeTime() != 0) {
-                firstPracticeTimeTextView.setText(AppUtils.formatLongToDate(entity.getFirstPracticeTime()));
+                firstPracticeTimeTextView.setText(AppUtils.formatValidLongToDate(entity.getFirstPracticeTime(),0));
             }
             expertInTextView.setText(entity.getExpertIn());
             mobileTextView.setText(entity.getMobile());

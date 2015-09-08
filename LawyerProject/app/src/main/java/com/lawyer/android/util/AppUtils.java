@@ -56,12 +56,21 @@ public class AppUtils {
      * @return
      */
     public static String formatLongToDate(long date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:dd");
         // 前面的lSysTime是秒数，先乘1000得到毫秒数，再转为java.util.Date类型
         java.util.Date dt = new Date(date);
         String sDateTime = sdf.format(dt); // 得到精确到秒的表示：08/31/2006 21:08:00
         return sDateTime;
     }
+    public static String formatValidLongToDate(long date,int index) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // 前面的lSysTime是秒数，先乘1000得到毫秒数，再转为java.util.Date类型
+        java.util.Date dt = new Date(date);
+        dt.setYear(dt.getYear()+index);
+        String sDateTime = sdf.format(dt); // 得到精确到秒的表示：08/31/2006 21:08:00
+        return sDateTime;
+    }
+
 
     /**
      * 将date字符串型型转换成long

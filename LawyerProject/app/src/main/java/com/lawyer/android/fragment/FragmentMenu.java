@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -35,6 +36,7 @@ public class FragmentMenu extends Fragment {
     private ListView mListView;
     private List<MenuEntity> menuItems;
     private ImageView avaterImageView;
+    private Button workButton;
     public FragmentMenu() {
 
     }
@@ -55,6 +57,7 @@ public class FragmentMenu extends Fragment {
         View view = inflater.inflate(R.layout.view_fragment_main_menu, null);
         mListView = (ListView) view.findViewById(R.id.activity_main_menu_listview);
         avaterImageView= (ImageView) view.findViewById(R.id.avaterImageView);
+        workButton= (Button) view.findViewById(R.id.workButton);
         return view;
     }
 
@@ -101,6 +104,28 @@ public class FragmentMenu extends Fragment {
                 }, 500);
             }
         });
+
+        String work=PreferencesUtils.getString(getActivity(),Constants.PRE_WORK,Constants.WORK_OFF);
+        if(work.equals(Constants.WORK_OFF)){
+            workButton.setText(R.string.work_off);
+        }else{
+            workButton.setText(R.string.work_on);
+        }
+
+        workButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String work=PreferencesUtils.getString(getActivity(),Constants.PRE_WORK,Constants.WORK_OFF);
+                if(work.equals(Constants.WORK_OFF)){
+                    PreferencesUtils.putString(getActivity(),Constants.PRE_WORK,Constants.WORK_ON);
+                    workButton.setText(R.string.work_on);
+                }else{
+                    PreferencesUtils.putString(getActivity(),Constants.PRE_WORK,Constants.WORK_OFF);
+                    workButton.setText(R.string.work_off);
+                }
+            }
+        });
+
     }
 
     /**

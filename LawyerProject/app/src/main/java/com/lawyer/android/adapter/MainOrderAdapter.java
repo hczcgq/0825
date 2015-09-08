@@ -40,11 +40,25 @@ public class MainOrderAdapter extends BaseAdapterHelpter<OrderEntity.OrdersEntit
         Button DetailButton=holder.getView(R.id.DetailButton);
         Button orderButton=holder.getView(R.id.orderButton);
 
-        OrderEntity.OrdersEntity entity=datas.get(position);
+        final OrderEntity.OrdersEntity entity=datas.get(position);
         orderNoTextView.setText(entity.getPayNo());
         productNameTextView.setText("产品名称：" + entity.getProduct().getName());
         productPriceTextView.setText("产品金额："+entity.getProduct().getPrice());
         createTimeTextView.setText(AppUtils.formatLongToDate(entity.getCreateDate()));
+
+        DetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onDetail(entity.getId());
+            }
+        });
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onOrder(entity.getId());
+            }
+        });
+
         return holder.getConvertView();
     }
 
@@ -55,7 +69,7 @@ public class MainOrderAdapter extends BaseAdapterHelpter<OrderEntity.OrdersEntit
     }
 
     public interface OrderListener{
-        public void onDetail(String no);
-        public void onOrder(String no);
+        public void onDetail(int no);
+        public void onOrder(int no);
     }
 }

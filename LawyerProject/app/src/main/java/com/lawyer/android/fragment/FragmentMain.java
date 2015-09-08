@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.lawyer.android.http.HttpHelper;
 import com.lawyer.android.http.httpUtils;
 import com.lawyer.android.util.Constants;
 import com.lawyer.android.util.LoadingDialog;
+import com.lawyer.android.util.PreferencesUtils;
 import com.lawyer.android.util.StringUtils;
 import com.lawyer.android.util.ToastUtils;
 
@@ -38,6 +40,10 @@ public class FragmentMain extends Fragment implements MainOrderAdapter.OrderList
     private TextView noOrderTextView;
     private MainOrderAdapter adapter;
     private FragmentMain mContext;
+    private TextView orderTextView;
+
+    public static final int REQUEST_NEW=11;
+    public static final int REQUEST_BIND=12;
 
     public FragmentMain() {
         mContext=this;
@@ -51,6 +57,7 @@ public class FragmentMain extends Fragment implements MainOrderAdapter.OrderList
         mListView= (ListView) view.findViewById(R.id.mListView);
         buttonRelativeLayout= (RelativeLayout) view.findViewById(R.id.buttonRelativeLayout);
         noOrderTextView= (TextView) view.findViewById(R.id.noOrderTextView);
+        orderTextView= (TextView) view.findViewById(R.id.orderTextView);
         return view;
     }
 
@@ -64,13 +71,19 @@ public class FragmentMain extends Fragment implements MainOrderAdapter.OrderList
         buttonRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, String> map=new HashMap<String, String>();
-                map.put("v","1.0");
-                map.put("ts", StringUtils.getCurrentTimes());
-                map.put("appKey", Constants.APP_KEY);
-                map.put("method", getString(R.string.lawyer_order_newlist_url));
-                map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
-                loadDate(map);
+                String work= PreferencesUtils.getString(getActivity(),Constants.PRE_WORK);
+                if(work.equals(Constants.WORK_ON)) {
+                    orderTextView.setText("订单中");
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("v", "1.0");
+                    map.put("ts", StringUtils.getCurrentTimes());
+                    map.put("appKey", Constants.APP_KEY);
+                    map.put("method", getString(R.string.lawyer_order_newlist_url));
+                    map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
+                    loadDate(map,REQUEST_NEW);
+                }else{
+                    ToastUtils.showToastShort(getActivity(),"现在是下班时间,无法抢单！");
+                }
             }
         });
     }
@@ -81,22 +94,31 @@ public class FragmentMain extends Fragment implements MainOrderAdapter.OrderList
      * 加载数据
      * @param map
      */
-    private void loadDate( Map<String, String> map) {
+    private void loadDate( Map<String, String> map,int request_code) {
         if (mRequestData != null
                 && mRequestData.getStatus() != AsyncTask.Status.FINISHED)
             mRequestData.cancel(true);
-        mRequestData = new RequestData(map);
+        mRequestData = new RequestData(map,request_code);
         mRequestData.execute();
     }
 
     @Override
-    public void onDetail(String no) {
+    public void onDetail(int no) {
 
     }
 
     @Override
-    public void onOrder(String no) {
-
+    public void onOrder(int no) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("v", "1.0");
+        map.put("ts", StringUtils.getCurrentTimes());
+        map.put("appKey", Constants.APP_KEY);
+        map.put("id", no+"");
+        map.put("lawyerId", PreferencesUtils.getString(getActivity(),Constants.PRE_LAWYERID));
+        map.put("mac", PreferencesUtils.getString(getActivity(),Constants.PRE_MAC));
+        map.put("method", getString(R.string.lawyer_order_bind_url));
+        map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
+        loadDate(map,REQUEST_NEW);
     }
 
 
@@ -104,17 +126,23 @@ public class FragmentMain extends Fragment implements MainOrderAdapter.OrderList
 
     class RequestData extends AsyncTask<String,Void ,OrderEntity>{
         private Map<String, String> map;
-
-        public RequestData(Map<String, String> map) {
+        private int request_code;
+        public RequestData(Map<String, String> map, int request_code) {
+            this.request_code=request_code;
             this.map=map;
         }
+
+
+
 
         @Override
         protected OrderEntity doInBackground(String... params) {
             OrderEntity item=null;
             try {
                 String result= HttpHelper.doRequestForString(getActivity(), getString(R.string.base_url), HttpHelper.HTTP_POST, map);
-                item=new Gson().fromJson(result,new TypeToken<OrderEntity>() {}.getType());
+                Log.e("---bang",result);
+                item=new Gson().fromJson(result, new TypeToken<OrderEntity>() {
+                }.getType());
             } catch (Exception e) {
                 e.printStackTrace();
             }

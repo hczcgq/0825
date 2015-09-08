@@ -1,11 +1,12 @@
 package com.lawyer.android.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by chenguoquan on 9/2/15.
  */
-public class OrderEntity {
+public class OrderEntity implements Serializable {
 
 
     /**
@@ -176,7 +177,7 @@ public class OrderEntity {
             return user;
         }
 
-        public static class ProductEntity {
+        public static class ProductEntity implements Serializable{
             /**
              * id : 1
              * name : 百元聘律师
@@ -212,7 +213,7 @@ public class OrderEntity {
             }
         }
 
-        public static class UserEntity {
+        public static class UserEntity implements Serializable{
             /**
              * createDate : 1439349680000
              * id : 5

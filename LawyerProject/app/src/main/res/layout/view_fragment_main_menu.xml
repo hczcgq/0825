@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/avaterImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
@@ -18,7 +18,7 @@
         android:id="@+id/workButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/edittext_height"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -36,7 +36,7 @@
         android:layout_marginRight="10dp"
         android:layout_below="@+id/avaterImageView"
         android:background="@color/line_color"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="10dp"/>
     <ListView
         android:id="@+id/activity_main_menu_listview"
         android:layout_width="match_parent"
@@ -46,8 +46,10 @@
         android:layout_below="@+id/lineTextView"
         android:dividerHeight="1px"
         android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
+        android:scrollbars="none"
         android:footerDividersEnabled="true"
-        android:headerDividersEnabled="true"
+        android:headerDividersEnabled="false"
         android:layout_above="@+id/workButton"
         android:cacheColorHint="#00000000"/>
 

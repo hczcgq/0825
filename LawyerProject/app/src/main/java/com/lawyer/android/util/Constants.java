@@ -21,6 +21,12 @@ public class Constants {
 
     public static final String PRE_MAC="PER_MAC"; //信息校验
 
+
+    public static final String PRE_WORK="PRE_WORK"; //上班下班
+
+    public static final String WORK_ON="on"; //上班
+    public static final String WORK_OFF="off"; //下班
+
     public static final int WHEEL_SEX=10;
     public static final int WHEEL_EDU=11;
 
