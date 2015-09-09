@@ -93,6 +93,7 @@ public class ForgetPasswordActivity extends BaseUIActivity{
         map.put("method", getString(R.string.lawyer_validationcode_url));
         map.put("cellPhone", mobile);
         map.put("userType", "LAWYER");
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(REQUEST_VALIDATIONCODE,map);
     }
@@ -132,6 +133,7 @@ public class ForgetPasswordActivity extends BaseUIActivity{
         map.put("cellPhone", mobile);
         map.put("password", password);
         map.put("validateCode", verify);
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(REQUEST_RESETPASSWORD,map);
     }
@@ -178,7 +180,7 @@ public class ForgetPasswordActivity extends BaseUIActivity{
             mLoadingDialog.dismiss();
             if(result!=null){
                 if(result.getSuccess()){
-                    if(request_code==REQUEST_VALIDATIONCODE) {
+                    if(request_code==REQUEST_RESETPASSWORD) {
                         PreferencesUtils.putString(ForgetPasswordActivity.this, Constants.PRE_PASSWORD, passwordEditText.getText().toString());
                         ToastUtils.showToastShort(ForgetPasswordActivity.this, "重置成功");
                         finish();

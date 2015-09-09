@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
@@ -118,7 +119,6 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         telTextView.setOnClickListener(this);
         lawyerCertificateNoTextView.setOnClickListener(this);
         idCardTextView.setOnClickListener(this);
-        lawFirmNameTextView.setOnClickListener(this);
     }
 
     private void initData() {
@@ -136,6 +136,7 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         map.put("appKey", Constants.APP_KEY);
         map.put("method", getString(R.string.lawyer_get_url));
         map.put("lawyerId", lawyerID);
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(REQUEST_GETPERSON, map);
     }
@@ -210,14 +211,6 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
                 intent.putExtra("name",idCardTextView.getText().toString());
                 startActivityForResult(intent, CODE_IDCARD);
                 break;
-            case R.id.lawFirmNameTextView:
-                intent = new Intent(this, UpdatePersonActivity.class);
-                intent.putExtra("tag", CODE_FIRMNAME);
-                intent.putExtra("name",lawFirmNameTextView.getText().toString());
-                startActivityForResult(intent, CODE_FIRMNAME);
-                break;
-
-
         }
     }
 
@@ -234,6 +227,7 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         map.put("method", getString(R.string.lawyer_update_url));
         map.put("id", lawyerID);
         map.put("mac", mac);
+        map.put("nvl", "true");
         if (requestCode == CODE_AVATER && resultCode == CODE_AVATER) { //头像
             image_path = data.getStringExtra("image");
             if(StringUtils.isEmpty(image_path)){
@@ -401,19 +395,21 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
     private void showContent(PersonEntity.LawyerEntity entity,int request_code){
         if(entity!=null) {
             nameTextView.setText(entity.getName());
-            if (entity.getBirthday() != 0) {
-                birthdayTextView.setText(AppUtils.formatValidLongToDate(entity.getBirthday(),0));
+            if (!StringUtils.isEmpty(entity.getBirthday())) {
+                birthdayTextView.setText(AppUtils.getDateFromString(entity.getBirthday()));
             }
             sexTextView.setText(entity.getSex());
-            if (entity.getFirstPracticeTime() != 0) {
-                firstPracticeTimeTextView.setText(AppUtils.formatValidLongToDate(entity.getFirstPracticeTime(),0));
+            if (!StringUtils.isEmpty(entity.getFirstPracticeTime())) {
+                firstPracticeTimeTextView.setText(AppUtils.getDateFromString(entity.getFirstPracticeTime()));
             }
             expertInTextView.setText(entity.getExpertIn());
             mobileTextView.setText(entity.getMobile());
             telTextView.setText(entity.getTel());
             lawyerCertificateNoTextView.setText(entity.getLawyerCertificateNo());
             idCardTextView.setText(entity.getIdCard());
-
+            if(!StringUtils.isEmpty(entity.getLawFirm())){
+                lawFirmNameTextView.setText(entity.getLawFirm());
+            }
             if (request_code == REQUEST_UPDATEPERSONAVATER) {
                 String url="file:///"+image_path;
                 imageLoader.displayImage(url, avaterImageView, options);

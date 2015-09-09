@@ -8,12 +8,18 @@ public class SuccessEntity {
 
 
     /**
-     * message : 数据校验异常，请和管理员联系！
-     * success : false
+     * body :
+     * message :
+     * success : true
      */
 
+    private String body;
     private String message;
     private boolean success;
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 
     public void setMessage(String message) {
         this.message = message;
@@ -21,6 +27,10 @@ public class SuccessEntity {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public String getBody() {
+        return body;
     }
 
     public String getMessage() {

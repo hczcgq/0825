@@ -79,6 +79,7 @@ public class FragmentMain extends Fragment implements MainOrderAdapter.OrderList
                     map.put("ts", StringUtils.getCurrentTimes());
                     map.put("appKey", Constants.APP_KEY);
                     map.put("method", getString(R.string.lawyer_order_newlist_url));
+                    map.put("nvl", "true");
                     map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
                     loadDate(map,REQUEST_NEW);
                 }else{
@@ -117,6 +118,7 @@ public class FragmentMain extends Fragment implements MainOrderAdapter.OrderList
         map.put("lawyerId", PreferencesUtils.getString(getActivity(),Constants.PRE_LAWYERID));
         map.put("mac", PreferencesUtils.getString(getActivity(),Constants.PRE_MAC));
         map.put("method", getString(R.string.lawyer_order_bind_url));
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(map,REQUEST_NEW);
     }

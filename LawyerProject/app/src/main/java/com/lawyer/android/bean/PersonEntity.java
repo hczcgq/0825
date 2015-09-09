@@ -7,80 +7,107 @@ import java.io.Serializable;
  */
 public class PersonEntity implements Serializable{
 
+
     /**
-     * lawyer : {"birthday":1441123200000,"consultNum":0,"expertIn":"dd","firstPracticeTime":1441123200000,"id":2,"idCard":"212121212121","lawyerCertificateNo":"211111111","loginCode":"18516276648","mac":"03F31A05CE9628F8BB93B31CAFE36043E2A3E034","mobile":"15926395578","name":"陈列","orderNum":0,"registerDate":1440755520000,"sex":"男","status":"VALID","tel":"12121212","updateDate":1441371009000}
+     * body :
+     * lawyer : {"auditStatus":null,"birthday":"2015-09-06 00:00:00","consultNum":0,"expertIn":"marry","firstPracticeTime":"2013-07-02 00:00:00","id":2,"idCard":"4210231990124312","lawFirm":null,"lawyerCertificateNo":"0912718526152","lawyerCertificatePhoto":"","level":"","loginCode":"18516276648","mac":"6579CE9DF58392F3543EB4DE555FEFBD61CA4A7E","mobile":"15926395578","name":"陈22","orderNum":0,"recordUrl":"","registerDate":"2015-08-28 17:52:00","sex":"未指定","status":"VALID","tel":"18516276648","updateDate":"2015-09-08 21:12:04","userLogoUrl":"http://static.shuofatang.com/upload/images/201509/08/1441717924298053473.jpg"}
+     * message :
      * success : true
      */
 
+    private String body;
     private LawyerEntity lawyer;
     private String message;
     private boolean success;
 
+    public void setBody(String body) {
+        this.body = body;
+    }
+
     public void setLawyer(LawyerEntity lawyer) {
         this.lawyer = lawyer;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public LawyerEntity getLawyer() {
-        return lawyer;
-    }
-
-    public boolean getSuccess() {
-        return success;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
 
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public LawyerEntity getLawyer() {
+        return lawyer;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public boolean getSuccess() {
+        return success;
+    }
+
     public static class LawyerEntity {
         /**
-         * birthday : 1441123200000
+         * auditStatus : null
+         * birthday : 2015-09-06 00:00:00
          * consultNum : 0
-         * expertIn : dd
-         * firstPracticeTime : 1441123200000
+         * expertIn : marry
+         * firstPracticeTime : 2013-07-02 00:00:00
          * id : 2
-         * idCard : 212121212121
-         * lawyerCertificateNo : 211111111
+         * idCard : 4210231990124312
+         * lawFirm : null
+         * lawyerCertificateNo : 0912718526152
+         * lawyerCertificatePhoto :
+         * level :
          * loginCode : 18516276648
-         * mac : 03F31A05CE9628F8BB93B31CAFE36043E2A3E034
+         * mac : 6579CE9DF58392F3543EB4DE555FEFBD61CA4A7E
          * mobile : 15926395578
-         * name : 陈列
+         * name : 陈22
          * orderNum : 0
-         * registerDate : 1440755520000
-         * sex : 男
+         * recordUrl :
+         * registerDate : 2015-08-28 17:52:00
+         * sex : 未指定
          * status : VALID
-         * tel : 12121212
-         * updateDate : 1441371009000
+         * tel : 18516276648
+         * updateDate : 2015-09-08 21:12:04
+         * userLogoUrl : http://static.shuofatang.com/upload/images/201509/08/1441717924298053473.jpg
          */
 
-        private long birthday;
+        private Object auditStatus;
+        private String birthday;
         private int consultNum;
         private String expertIn;
-        private long firstPracticeTime;
+        private String firstPracticeTime;
         private int id;
         private String idCard;
+        private String lawFirm;
         private String lawyerCertificateNo;
+        private String lawyerCertificatePhoto;
+        private String level;
         private String loginCode;
         private String mac;
         private String mobile;
         private String name;
         private int orderNum;
-        private long registerDate;
+        private String recordUrl;
+        private String registerDate;
         private String sex;
         private String status;
         private String tel;
-        private long updateDate;
+        private String updateDate;
         private String userLogoUrl;
 
-        public void setBirthday(long birthday) {
+        public void setAuditStatus(Object auditStatus) {
+            this.auditStatus = auditStatus;
+        }
+
+        public void setBirthday(String birthday) {
             this.birthday = birthday;
         }
 
@@ -92,7 +119,7 @@ public class PersonEntity implements Serializable{
             this.expertIn = expertIn;
         }
 
-        public void setFirstPracticeTime(long firstPracticeTime) {
+        public void setFirstPracticeTime(String firstPracticeTime) {
             this.firstPracticeTime = firstPracticeTime;
         }
 
@@ -104,8 +131,20 @@ public class PersonEntity implements Serializable{
             this.idCard = idCard;
         }
 
+        public void setLawFirm(String lawFirm) {
+            this.lawFirm = lawFirm;
+        }
+
         public void setLawyerCertificateNo(String lawyerCertificateNo) {
             this.lawyerCertificateNo = lawyerCertificateNo;
+        }
+
+        public void setLawyerCertificatePhoto(String lawyerCertificatePhoto) {
+            this.lawyerCertificatePhoto = lawyerCertificatePhoto;
+        }
+
+        public void setLevel(String level) {
+            this.level = level;
         }
 
         public void setLoginCode(String loginCode) {
@@ -128,7 +167,11 @@ public class PersonEntity implements Serializable{
             this.orderNum = orderNum;
         }
 
-        public void setRegisterDate(long registerDate) {
+        public void setRecordUrl(String recordUrl) {
+            this.recordUrl = recordUrl;
+        }
+
+        public void setRegisterDate(String registerDate) {
             this.registerDate = registerDate;
         }
 
@@ -144,11 +187,19 @@ public class PersonEntity implements Serializable{
             this.tel = tel;
         }
 
-        public void setUpdateDate(long updateDate) {
+        public void setUpdateDate(String updateDate) {
             this.updateDate = updateDate;
         }
 
-        public long getBirthday() {
+        public void setUserLogoUrl(String userLogoUrl) {
+            this.userLogoUrl = userLogoUrl;
+        }
+
+        public Object getAuditStatus() {
+            return auditStatus;
+        }
+
+        public String getBirthday() {
             return birthday;
         }
 
@@ -160,7 +211,7 @@ public class PersonEntity implements Serializable{
             return expertIn;
         }
 
-        public long getFirstPracticeTime() {
+        public String getFirstPracticeTime() {
             return firstPracticeTime;
         }
 
@@ -172,8 +223,20 @@ public class PersonEntity implements Serializable{
             return idCard;
         }
 
+        public String getLawFirm() {
+            return lawFirm;
+        }
+
         public String getLawyerCertificateNo() {
             return lawyerCertificateNo;
+        }
+
+        public String getLawyerCertificatePhoto() {
+            return lawyerCertificatePhoto;
+        }
+
+        public String getLevel() {
+            return level;
         }
 
         public String getLoginCode() {
@@ -196,7 +259,11 @@ public class PersonEntity implements Serializable{
             return orderNum;
         }
 
-        public long getRegisterDate() {
+        public String getRecordUrl() {
+            return recordUrl;
+        }
+
+        public String getRegisterDate() {
             return registerDate;
         }
 
@@ -212,16 +279,12 @@ public class PersonEntity implements Serializable{
             return tel;
         }
 
-        public long getUpdateDate() {
+        public String getUpdateDate() {
             return updateDate;
         }
 
         public String getUserLogoUrl() {
             return userLogoUrl;
-        }
-
-        public void setUserLogoUrl(String userLogoUrl) {
-            this.userLogoUrl = userLogoUrl;
         }
     }
 }

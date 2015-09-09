@@ -48,7 +48,7 @@ public class AdviceAdapter extends BaseAdapterHelpter<AdviceEntity.ConsultsEntit
         mobileTextView.setText(entity.getUser().getMobile());
         lawyerQuestionBigTextView.setText("法律问题大类：" + entity.getCategory().getParent().getName());
         lawyerQuestionSmallTextView.setText("法律问题小类：" + entity.getCategory().getName());
-        createTimeTextView.setText("订单时间："+AppUtils.formatLongToDate(entity.getCreateDate()));
+        createTimeTextView.setText("订单时间："+AppUtils.getDateFromString(entity.getCreateDate()));
 
         userNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override

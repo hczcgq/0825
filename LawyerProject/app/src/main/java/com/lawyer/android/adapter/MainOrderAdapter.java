@@ -44,7 +44,7 @@ public class MainOrderAdapter extends BaseAdapterHelpter<OrderEntity.OrdersEntit
         orderNoTextView.setText(entity.getPayNo());
         productNameTextView.setText("产品名称：" + entity.getProduct().getName());
         productPriceTextView.setText("产品金额："+entity.getProduct().getPrice());
-        createTimeTextView.setText(AppUtils.formatLongToDate(entity.getCreateDate()));
+        createTimeTextView.setText(AppUtils.getDateFromString(entity.getCreateDate()));
 
         DetailButton.setOnClickListener(new View.OnClickListener() {
             @Override

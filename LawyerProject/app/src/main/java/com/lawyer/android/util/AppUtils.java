@@ -62,6 +62,8 @@ public class AppUtils {
         String sDateTime = sdf.format(dt); // 得到精确到秒的表示：08/31/2006 21:08:00
         return sDateTime;
     }
+
+
     public static String formatValidLongToDate(long date,int index) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         // 前面的lSysTime是秒数，先乘1000得到毫秒数，再转为java.util.Date类型
@@ -88,5 +90,23 @@ public class AppUtils {
         }
         //继续转换得到秒数的long型
         return  dt2.getTime() / 1000;
+    }
+
+
+
+    public static String getDateFromString(String str){
+        String[] strings=str.split(" ");
+        if(str.length()>0){
+            return strings[0];
+        }
+        return "";
+    }
+    public static String getDateFromString(String str,int i){
+        String[] strings=str.split(" ");
+        if(str.length()>0){
+            String day=strings[0];
+            return (Integer.parseInt(day.split("-")[0])+1)+"-"+day.split("-")[1]+"-"+day.split("-")[2];
+        }
+        return "";
     }
 }

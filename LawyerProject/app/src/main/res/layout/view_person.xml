@@ -415,7 +415,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:drawablePadding="10dp"
-                    android:drawableRight="@drawable/icon_arrow"
                     android:gravity="center|right"
                     android:hint="@string/input_lawyer_firmName"
                     android:textColor="@android:color/black"

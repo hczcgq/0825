@@ -93,6 +93,7 @@ public class RegisterActivity extends BaseUIActivity{
         map.put("method", getString(R.string.lawyer_validationcode_url));
         map.put("cellPhone", mobile);
         map.put("userType", "LAWYER");
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(REQUEST_VALIDATIONCODE, map);
 
@@ -142,6 +143,7 @@ public class RegisterActivity extends BaseUIActivity{
         map.put("loginCode", mobile);
         map.put("password", password);
         map.put("verifyCode", verify);
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(REQUEST_REGISTER,map);
     }

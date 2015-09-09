@@ -3,7 +3,6 @@ package com.lawyer.android.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -85,6 +84,7 @@ public class LoginActivity extends BaseUIActivity{
         map.put("method",getString(R.string.lawyer_login_url));
         map.put("loginCode", mobile);
         map.put("password", password);
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(map);
     }
@@ -96,7 +96,6 @@ public class LoginActivity extends BaseUIActivity{
      */
     public void RegisterClick(View view){
         intent=new Intent(this,RegisterActivity.class);
-//        startActivity(intent);
         startActivityForResult(intent,REQUEST_REGISTER);
     }
 
@@ -145,7 +144,6 @@ public class LoginActivity extends BaseUIActivity{
             PersonEntity item =null;
             try {
                 String result= HttpHelper.doRequestForString(LoginActivity.this,getString(R.string.base_url),HttpHelper.HTTP_POST ,map);
-                Log.e("---",result);
                 item = new Gson().fromJson(result, PersonEntity.class);
             } catch (Exception e) {
                 e.printStackTrace();

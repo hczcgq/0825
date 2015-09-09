@@ -62,6 +62,7 @@ public class FragmentAdvice extends Fragment {
         map.put("userType", "LAWYER");
         map.put("extId", "lawyerId");
         map.put("method", getString(R.string.lawyer_consult_list_url));
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(map);
     }

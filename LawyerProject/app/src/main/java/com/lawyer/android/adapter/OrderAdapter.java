@@ -11,6 +11,7 @@ import com.lawyer.android.R;
 import com.lawyer.android.activity.UserActivity;
 import com.lawyer.android.bean.OrderEntity;
 import com.lawyer.android.util.AppUtils;
+import com.lawyer.android.util.StringUtils;
 
 import java.util.List;
 
@@ -45,12 +46,14 @@ public class OrderAdapter extends BaseAdapterHelpter<OrderEntity.OrdersEntity>{
 
         final OrderEntity.OrdersEntity entity=datas.get(position);
         orderNoTextView.setText(entity.getPayNo());
-        userNameTextView.setText("昵称："+entity.getUser().getNickname());
+        if(!StringUtils.isEmpty(entity.getUser().getNickname())) {
+            userNameTextView.setText("昵称：" + entity.getUser().getNickname());
+        }
         mobileTextView.setText(entity.getUser().getMobile());
         productNameTextView.setText("产品名称："+entity.getProduct().getName());
         productPriceTextView.setText("产品金额："+entity.getProduct().getPrice());
-        createTimeTextView.setText("订单时间："+AppUtils.formatLongToDate(entity.getCreateDate()));
-        validTimeTextView.setText("有效期："+AppUtils.formatValidLongToDate(entity.getCreateDate(), 0) +"至"+AppUtils.formatValidLongToDate(entity.getCreateDate(),1));
+        createTimeTextView.setText("订单时间："+AppUtils.getDateFromString(entity.getCreateDate()));
+        validTimeTextView.setText("有效期："+AppUtils.getDateFromString(entity.getCreateDate()) +"至"+AppUtils.getDateFromString(entity.getCreateDate(), 1));
 
         userNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override

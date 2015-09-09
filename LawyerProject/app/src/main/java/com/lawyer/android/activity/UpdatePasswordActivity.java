@@ -112,6 +112,7 @@ public class UpdatePasswordActivity extends BaseUIActivity{
         map.put("lawyerId", lawyerId);
         map.put("password", newPassword);
         map.put("mac", mac);
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(map);
 

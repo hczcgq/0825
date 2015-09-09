@@ -15,6 +15,7 @@
     <string name="lawyer_order_newlist_url">order.newlist</string>
     <string name="lawyer_order_bind_url">order.bind</string>
     <string name="lawyer_consult_list_url">consult.list</string>
+    <string name="lawyer_feedback_save_url">feedback.save</string>
 
 
  </resources>

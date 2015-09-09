@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.lawyer.android.R;
 import com.lawyer.android.base.BaseUIActivity;
 import com.lawyer.android.bean.AdviceEntity;
+import com.lawyer.android.util.StringUtils;
 
 /**
  * Created by chenguoquan on 9/6/15.
@@ -50,7 +51,9 @@ public class UserActivity extends BaseUIActivity{
     private void initData() {
         AdviceEntity.ConsultsEntity.UserEntity userEntity= (AdviceEntity.ConsultsEntity.UserEntity) getIntent().getSerializableExtra("User");
         nameTextView.setText(userEntity.getName());
-//        nickNameTextView.setText(userEntity.getName());
+        if(!StringUtils.isEmpty(userEntity.getName())) {
+            nickNameTextView.setText(userEntity.getName());
+        }
         mobileTextView.setText(userEntity.getMobile());
         idCardTextView.setText(userEntity.getIdCard());
     }

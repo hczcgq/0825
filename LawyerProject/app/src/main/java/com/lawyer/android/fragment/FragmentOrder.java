@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class FragmentOrder extends Fragment {
         map.put("userType", "LAWYER");
         map.put("extId", "lawyerId");
         map.put("method", getString(R.string.lawyer_order_list_url));
+        map.put("nvl", "true");
         map.put("sign", httpUtils.sign(map, Constants.APP_SECRET));
         loadDate(map);
     }
@@ -92,7 +94,9 @@ public class FragmentOrder extends Fragment {
             OrderEntity item=null;
             try {
                 String result= HttpHelper.doRequestForString(getActivity(), getString(R.string.base_url), HttpHelper.HTTP_POST, map);
-                item=new Gson().fromJson(result,new TypeToken<OrderEntity>() {}.getType());
+                Log.e("---",result);
+                item=new Gson().fromJson(result, new TypeToken<OrderEntity>() {
+                }.getType());
             } catch (Exception e) {
                 e.printStackTrace();
             }
