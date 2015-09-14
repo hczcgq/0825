@@ -71,9 +71,9 @@ public class FragmentMain extends Fragment implements MainOrderAdapter.OrderList
         buttonRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String work= PreferencesUtils.getString(getActivity(),Constants.PRE_WORK);
+                String work= PreferencesUtils.getString(getActivity(),Constants.PRE_WORK,Constants.WORK_OFF);
                 if(work.equals(Constants.WORK_ON)) {
-                    orderTextView.setText("订单中");
+                    orderTextView.setText("听单中");
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("v", "1.0");
                     map.put("ts", StringUtils.getCurrentTimes());

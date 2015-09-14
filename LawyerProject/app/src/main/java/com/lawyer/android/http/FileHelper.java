@@ -121,6 +121,50 @@ public class FileHelper {
         }
         return result;
     }
+    public static String uploadHttpClient(Context context, String url,
+                                          Map<String, String> map, String image1,String image2) {
+        String result = null;
+        HttpClient client = getHttpClient(context);
+        HttpPost post = new HttpPost(url);
+        File file1 = new File(image1);
+        FileBody fileBody1 = new FileBody(file1);
+        File file2 = new File(image2);
+        FileBody fileBody2 = new FileBody(file2);
+        MultipartEntity entity = new MultipartEntity(
+                HttpMultipartMode.BROWSER_COMPATIBLE);
+        @SuppressWarnings("rawtypes")
+        Iterator iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            @SuppressWarnings("rawtypes")
+            Map.Entry items = (Map.Entry) iterator.next();
+            try {
+                entity.addPart((String) items.getKey(), new StringBody(
+                        (String) items.getValue()));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+
+        entity.addPart("photo1", fileBody1);
+        entity.addPart("photo2", fileBody2);
+        post.setEntity(entity);
+        try {
+            HttpResponse response = client.execute(post);
+            if (response.getStatusLine().getStatusCode() == 200) {
+                result = EntityUtils.toString(response.getEntity(),
+                        DEFAULT_PARAMS_ENCODING);
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (ConnectTimeoutException e) {
+            e.printStackTrace();
+        } catch (SocketTimeoutException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     /**
      * 设置http头信息

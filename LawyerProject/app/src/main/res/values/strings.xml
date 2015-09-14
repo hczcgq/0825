@@ -70,6 +70,7 @@
     <string name="lawyer_certificate_no">执业证书编号</string>
     <string name="lawyer_idcard">身份证号码</string>
     <string name="lawyer_firmName">律所名称</string>
+    <string name="lawyer_upload_certificate">上传证件</string>
 
     <string name="input_lawyer_name">填写律师姓名</string>
     <string name="input_lawyer_expertIn">填写擅长领域</string>
@@ -77,11 +78,12 @@
     <string name="input_lawyer_tel">填写联系电话</string>
     <string name="input_lawyer_certificate_no">填写执业证书编号</string>
     <string name="input_lawyer_idcard">填写身份证号码</string>
-    <string name="input_lawyer_firmName">填写律所名称</string>
+    <string name="input_lawyer_firmName"></string>
 
     <string name="done">完成</string>
 
     <string name="detail">详情</string>
     <string name="order">接单</string>
+
 
 </resources>

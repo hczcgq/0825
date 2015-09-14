@@ -43,6 +43,7 @@ public class OrderAdapter extends BaseAdapterHelpter<OrderEntity.OrdersEntity>{
         TextView productPriceTextView=holder.getView(R.id.productPriceTextView);
         TextView createTimeTextView=holder.getView(R.id.createTimeTextView);
         TextView validTimeTextView=holder.getView(R.id.validTimeTextView);
+        TextView companyTextView=holder.getView(R.id.companyTextView);
 
         final OrderEntity.OrdersEntity entity=datas.get(position);
         orderNoTextView.setText(entity.getPayNo());
@@ -53,7 +54,14 @@ public class OrderAdapter extends BaseAdapterHelpter<OrderEntity.OrdersEntity>{
         productNameTextView.setText("产品名称："+entity.getProduct().getName());
         productPriceTextView.setText("产品金额："+entity.getProduct().getPrice());
         createTimeTextView.setText("订单时间："+AppUtils.getDateFromString(entity.getCreateDate()));
-        validTimeTextView.setText("有效期："+AppUtils.getDateFromString(entity.getCreateDate()) +"至"+AppUtils.getDateFromString(entity.getCreateDate(), 1));
+        validTimeTextView.setText("有效期：" + AppUtils.getDateFromString(entity.getCreateDate()) + "至" + AppUtils.getDateFromString(entity.getCreateDate(), 1));
+
+        if(entity.getProduct().getName().equals("千元聘法顾")){
+            companyTextView.setVisibility(View.VISIBLE);
+            companyTextView.setText("公司："+entity.getCompanyName());
+        }else{
+            companyTextView.setVisibility(View.GONE);
+        }
 
         userNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override

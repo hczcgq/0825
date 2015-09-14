@@ -64,6 +64,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.UserActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.UpdateCertificateActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.WheelDialogAvtivity"
             android:theme="@style/ActivityDialogStyle"

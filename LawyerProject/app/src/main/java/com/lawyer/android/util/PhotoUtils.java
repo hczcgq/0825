@@ -93,12 +93,12 @@ public class PhotoUtils {
      * @param bitmap
      * @return
      */
-    public static String savePhotoToSDCard(Bitmap bitmap) {
+    public static String savePhotoToSDCard(Bitmap bitmap,String name) {
         if (!FileUtils.isSdcardExist()) {
             return null;
         }
         FileUtils.createDirFile(Constants.SEND_IMAGE_PATH);
-        String fileName = Constants.SEND_IMAGE_PATH + "temp.jpg";
+        String fileName = Constants.SEND_IMAGE_PATH + name;
         File myCaptureFile = new File(fileName);
         BufferedOutputStream bos = null;
         FileOutputStream out = null;

@@ -26,6 +26,8 @@ public class SelectDialogActivity extends Activity {
 
     private String image_path;
 
+    private int tag;
+
     @SuppressWarnings({"deprecation", "static-access"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class SelectDialogActivity extends Activity {
         layoutParams.width = LinearLayout.LayoutParams.FILL_PARENT;
         layoutParams.height = layoutParams.FILL_PARENT;
         window.setAttributes(layoutParams);
+
+        tag=getIntent().getIntExtra("tag",0);
 
         btn_one = (Button) findViewById(R.id.btn_one);
         btn_two = (Button) findViewById(R.id.btn_two);
@@ -121,10 +125,19 @@ public class SelectDialogActivity extends Activity {
                 }
                 break;
             case PhotoUtils.INTENT_REQUEST_CODE_CROP:
+                String name="temp.jpg";
+                if(tag==0){
+                    name="temp.jpg";
+                }else if(tag==1){
+                    name="photo1.jpg";
+                }else if(tag==2){
+                    name="photo2.jpg";
+                }
                 if (data != null) {
                     Bitmap bitmap = data.getParcelableExtra("data");
                     if (bitmap != null) {
-                        image_path = PhotoUtils.savePhotoToSDCard(bitmap);
+
+                        image_path = PhotoUtils.savePhotoToSDCard(bitmap,name);
                     } else {
                         image_path = null;
                     }

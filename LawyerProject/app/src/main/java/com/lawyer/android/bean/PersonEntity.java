@@ -52,7 +52,7 @@ public class PersonEntity implements Serializable{
         return success;
     }
 
-    public static class LawyerEntity {
+    public static class LawyerEntity implements Serializable{
         /**
          * auditStatus : null
          * birthday : 2015-09-06 00:00:00

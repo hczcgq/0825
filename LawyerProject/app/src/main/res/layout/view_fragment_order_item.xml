@@ -39,6 +39,15 @@
             android:text="暂无律师"/>
     </RelativeLayout>
     <TextView
+        android:id="@+id/companyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/input_text"
+        android:text="公司："
+        android:visibility="gone"
+        android:padding="5dp"/>
+    <TextView
         android:id="@+id/productNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

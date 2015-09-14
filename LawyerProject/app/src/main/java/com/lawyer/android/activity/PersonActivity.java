@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -57,6 +58,7 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
     private TextView updatePasswordTextView;  //修改密码
     private TextView nameTextView, birthdayTextView, sexTextView, firstPracticeTimeTextView,
             expertInTextView, mobileTextView, telTextView, lawyerCertificateNoTextView, idCardTextView, lawFirmNameTextView;
+    private LinearLayout uploadLinearLayout;
     private String lawyerID;
     private String mac;
 
@@ -104,6 +106,7 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         lawyerCertificateNoTextView = (TextView) findViewById(R.id.lawyerCertificateNoTextView);
         idCardTextView = (TextView) findViewById(R.id.idCardTextView);
         lawFirmNameTextView = (TextView) findViewById(R.id.lawFirmNameTextView);
+        uploadLinearLayout= (LinearLayout) findViewById(R.id.uploadLinearLayout);
 
     }
 
@@ -119,6 +122,7 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         telTextView.setOnClickListener(this);
         lawyerCertificateNoTextView.setOnClickListener(this);
         idCardTextView.setOnClickListener(this);
+        uploadLinearLayout.setOnClickListener(this);
     }
 
     private void initData() {
@@ -147,6 +151,7 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.avaterImageView:
                 intent = new Intent(this, SelectDialogActivity.class);
+                intent.putExtra("tag",0);
                 startActivityForResult(intent, CODE_AVATER);
                 break;
             case R.id.updatePasswordTextView:
@@ -184,7 +189,7 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
             case R.id.expertInTextView:
                 intent = new Intent(this, UpdatePersonActivity.class);
                 intent.putExtra("tag", CODE_EXPERTH);
-                intent.putExtra("name",expertInTextView.getText().toString());
+                intent.putExtra("name", expertInTextView.getText().toString());
                 startActivityForResult(intent, CODE_EXPERTH);
                 break;
             case R.id.mobileTextView:
@@ -209,6 +214,11 @@ public class PersonActivity extends BaseUIActivity implements View.OnClickListen
                 intent = new Intent(this, UpdatePersonActivity.class);
                 intent.putExtra("tag", CODE_IDCARD);
                 intent.putExtra("name",idCardTextView.getText().toString());
+                startActivityForResult(intent, CODE_IDCARD);
+                break;
+            case R.id.uploadLinearLayout:
+                intent = new Intent(this, UpdateCertificateActivity.class);
+                intent.putExtra("person",temLawyerEntity);
                 startActivityForResult(intent, CODE_IDCARD);
                 break;
         }
